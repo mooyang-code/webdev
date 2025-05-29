@@ -29,7 +29,7 @@ export default {
   },
   menu: {
     ["home"]: "首页",
-    ["file"]: "文件管理",
+    ["file"]: "文件管理（no）",
     ["document-library"]: "文件库",
     ["table"]: "列表管理",
     ["common-table"]: "普通列表",

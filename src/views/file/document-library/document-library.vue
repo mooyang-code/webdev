@@ -3,6 +3,7 @@
     <div class="container">
       <div class="left-box" v-show="!isMobile">
         <div class="box-title">文件库</div>
+        <!-- (列表页的样式可以参考一下) -->
         <a-divider margin="0" />
         <FileTree class="file-tree-style" @on-node="onNode" />
       </div>
