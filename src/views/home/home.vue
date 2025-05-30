@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-page">
+  <div class="moox-page">
     <div class="home-page">
       <!-- 常用功能 -->
       <Shortcut />

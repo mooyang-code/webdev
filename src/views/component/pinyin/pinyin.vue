@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-card title="拼音转换" hoverable>
         <a-space direction="vertical" size="large" fill>
           <a-textarea v-model="myText" placeholder="请输入内容" allow-clear />

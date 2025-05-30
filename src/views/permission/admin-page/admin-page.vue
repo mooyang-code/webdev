@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-alert>
         当前页面
         <a-tag color="green"> 超级管理员 </a-tag>

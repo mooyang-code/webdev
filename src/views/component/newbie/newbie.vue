@@ -1,8 +1,8 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-space direction="vertical" :size="10">
-        <a-typography-text id="newbie-title-1"> SnowAdmin </a-typography-text>
+        <a-typography-text id="newbie-title-1"> MooX </a-typography-text>
         <a-typography-text id="newbie-title-2"> 清晰的项目架构：结构清晰，优雅易懂。 </a-typography-text>
         <a-typography-text id="newbie-title-3"> 严格的代码规范：严格遵循开发设计规范，保证代码的规范性。 </a-typography-text>
         <a-typography-text id="newbie-title-4"> 内置国际化方案：轻松实现多语言支持。</a-typography-text>
@@ -35,7 +35,7 @@ const openNewbie = () => {
       {
         element: "#newbie-title-1",
         popover: {
-          title: "SnowAdmin",
+          title: "MooX",
           description: "清新优雅的中后台管理模板",
           side: "right"
         }

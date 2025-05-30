@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-row class="grid-demo" :gutter="24">
         <a-col :span="12">
           <a-card title="图标选择器" :style="{ width: '100%' }">

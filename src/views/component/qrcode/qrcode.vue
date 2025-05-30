@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-row :gutter="24">
         <a-col :span="12">
           <div class="code-box">
@@ -25,7 +25,7 @@
 const codeList = ref([
   {
     id: 1,
-    text: "https://gitee.com/wang_fan_w/SnowAdmin",
+    text: "",
     docs: "img格式",
     tag: "img",
     options: {
@@ -42,7 +42,7 @@ const codeList = ref([
   },
   {
     id: 2,
-    text: "https://gitee.com/wang_fan_w/SnowAdmin",
+    text: "",
     docs: "自定义大小和颜色",
     tag: "img",
     options: {
@@ -59,7 +59,7 @@ const codeList = ref([
   },
   {
     id: 3,
-    text: "https://gitee.com/wang_fan_w/SnowAdmin",
+    text: "",
     docs: "canvas格式",
     tag: "canvas",
     options: {
@@ -76,7 +76,7 @@ const codeList = ref([
   },
   {
     id: 4,
-    text: "https://gitee.com/wang_fan_w/SnowAdmin",
+    text: "",
     docs: "高清晰度",
     tag: "img",
     options: {

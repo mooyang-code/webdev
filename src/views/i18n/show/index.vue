@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <p>{{ $t(`system.switch-language-to-preview`) }}</p>
       <br />
       <div>

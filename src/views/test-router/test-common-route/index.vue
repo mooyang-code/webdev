@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-card title="路由测试页">
         <a-space direction="vertical" fill>
           <div>路由：{{ route.path }}</div>

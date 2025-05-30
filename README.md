@@ -1,17 +1,17 @@
-# SnowAdmin
+# MooX
 
 <div>
 	<p>
-                <a href="https://github.com/WANG-Fan0912/SnowAdmin" target="_blank">
+                <a href="" target="_blank">
 		  <img src="https://img.shields.io/badge/License-MIT-%2343aefc" alt="License">
 		</a>
-		<a href="https://github.com/WANG-Fan0912/SnowAdmin" target="_blank">
+		<a href="" target="_blank">
 		  <img src="https://img.shields.io/badge/vue_.js-vue3_.x-%2300b42a" alt="Vue">
 		</a>
-                <a href="https://github.com/WANG-Fan0912/SnowAdmin" target="_blank">
+                <a href="" target="_blank">
 		  <img src="https://img.shields.io/badge/Vite-6x-%2311B337" alt="Vite">
 		</a>
-                <a href="https://github.com/WANG-Fan0912/SnowAdmin" target="_blank">
+                <a href="" target="_blank">
 		  <img src="https://img.shields.io/badge/Arco_Design-2.56.3-%2310b236" alt="Arco-Design">
 		</a>
 	</p>
@@ -19,22 +19,22 @@
 
 ### 介绍 📖
 
-SnowAdmin 是一个清新优雅、高颜值且功能强大的后台管理模板，基于最新的前端技术栈，包括 Vue3, Vite6, TypeScript, Pinia。它内置了丰富的主题配置和组件，代码规范严谨，实现了自动化的文件路由系统。SnowAdmin 为您提供了一站式的后台管理解决方案，无需额外配置，开箱即用。同样是一个快速学习前沿技术的最佳实践。
+MooX 是一个清新优雅、高颜值且功能强大的后台管理模板，基于最新的前端技术栈，包括 Vue3, Vite6, TypeScript, Pinia。它内置了丰富的主题配置和组件，代码规范严谨，实现了自动化的文件路由系统。MooX 为您提供了一站式的后台管理解决方案，无需额外配置，开箱即用。同样是一个快速学习前沿技术的最佳实践。
 
 ### 版本 📦
 
 **预览及文档**
 
-项目预览地址：[SnowAdmin](http://101.126.93.137/#/login)
+项目预览地址：[MooX](http://101.126.93.137/#/login)
 
-项目文档地址：[SnowAdmin-开发指南](http://101.126.93.137:81/)
+项目文档地址：[MooX-开发指南](http://101.126.93.137:81/)
 
 **代码仓库**
 
 | 平台   | 仓库地址                                                 |
 | ------ | -------------------------------------------------------- |
-| GitHub | [Github 仓库](https://github.com/WANG-Fan0912/SnowAdmin) |
-| Gitee  | [Gitee 仓库](https://gitee.com/wang_fan_w/SnowAdmin)     |
+| GitHub | [Github 仓库]() |
+| Gitee  | [Gitee 仓库]()     |
 
 > ⚠️主要的维护在github上，提issue/pr请认准github主战场
 > 
@@ -90,14 +90,14 @@ SnowAdmin 是一个清新优雅、高颜值且功能强大的后台管理模板�
 
 ```bash
 # 克隆代码
-git clone https://github.com/WANG-Fan0912/SnowAdmin.git
+git clone .git
 ```
 
 ### 从 Gitee 获取代码 🔗
 
 ```bash
 # 克隆代码
-git clone https://gitee.com/wang_fan_w/SnowAdmin.git
+git clone .git
 ```
 
 ### 安装依赖 📌
@@ -134,7 +134,7 @@ pnpm install
 ### 文件资源目录 📚
 
 ```text
-SnowAdmin
+MooX
 ├─ .husky                 # husky 配置文件
 ├─ .vscode                # VSCode 推荐配置
 ├─ build                  # vite项目配置目录
@@ -229,24 +229,24 @@ SnowAdmin
 
 ### 支持作者 🌟
 
-如果觉得框架不错，或者已经在使用了，希望你可以去 [GitHub](https://github.com/WANG-Fan0912/SnowAdmin) ⭐ Star，这将是对我极大的鼓励与支持。
+如果觉得框架不错，或者已经在使用了，希望你可以去 [GitHub]() ⭐ Star，这将是对我极大的鼓励与支持。
 
 ### 免责条款 📫
 
 您充分了解并同意，您必须为自己使用本服务及注册帐号下的一切行为负责，包括您所发表的任何内容以及由此产生的任何后果。您应对本服务中的内容自行加以判断，并自行承担因使用内容而引起的所有风险。
 
-`SnowAdmin` 对网站上所显示的信息或资料的准确性、内容、完整性、合法性、可靠性、可操作性或可用性不承担任何责任。
+`MooX` 对网站上所显示的信息或资料的准确性、内容、完整性、合法性、可靠性、可操作性或可用性不承担任何责任。
 
-`SnowAdmin` 二次开发使用者因为违法而触犯中华人民共和国法律的，一切后果自己负责，`SnowAdmin` 作者不承担任何责任。
+`MooX` 二次开发使用者因为违法而触犯中华人民共和国法律的，一切后果自己负责，`MooX` 作者不承担任何责任。
 
 本声明未涉及的问题参见国家有关法律法规，当本声明与国家法律法规冲突时，以国家法律法规为准。
 
 ### 学习 & 商用 🌈
 
-`SnowAdmin` 是免费和开源的，可免费用于学习、商业使用 。
+`MooX` 是免费和开源的，可免费用于学习、商业使用 。
 
 ### 捐赠
 
 |                                      微信                                      |                                      支付宝                                      |
 | :----------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
-| ![微信](https://gitee.com/wang_fan_w/snow-image/raw/main/introduce/Wechat.jpg) | ![支付宝](https://gitee.com/wang_fan_w/snow-image/raw/main/introduce/alipay.jpg) |
+| ![微信](https://gitee.com/wang_fan_w/moox-image/raw/main/introduce/Wechat.jpg) | ![支付宝](https://gitee.com/wang_fan_w/moox-image/raw/main/introduce/alipay.jpg) |

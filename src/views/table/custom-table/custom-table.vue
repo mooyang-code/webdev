@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-form ref="formRef" :model="formData.form" auto-label-width>
         <a-row :gutter="16">
           <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="6" :xxl="6">

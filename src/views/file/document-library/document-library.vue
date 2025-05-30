@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-page">
+  <div class="moox-page">
     <div class="container">
       <div class="left-box" v-show="!isMobile">
         <div class="box-title">文件库</div>

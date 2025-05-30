@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-card title="浏览器检测-通过设备浏览器信息获取浏览器指纹">
         <a-descriptions :column="1" :data="browserInfo" bordered />
       </a-card>

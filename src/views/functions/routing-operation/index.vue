@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-row :gutter="24">
         <a-col :span="12">
           <a-card title="普通路由">
@@ -68,7 +68,7 @@ const router = useRouter();
 const connom = ref({
   path: "/test-common-route",
   query: {
-    name: "SnowAdmin",
+    name: "MooX",
     text: "月之暗面"
   }
 });
@@ -84,7 +84,7 @@ const onQuery = () => {
 const dynamic = ref({
   name: "test-dynamic-route",
   params: {
-    name: "SnowAdmin",
+    name: "MooX",
     text: "月之暗面"
   }
 });

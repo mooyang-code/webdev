@@ -1,8 +1,8 @@
 <template>
-  <div class="snow-page">
+  <div class="moox-page">
     <a-card title="简介">
       <div>
-        <p>SnowAdmin 一款基于 Vue、TypeScript、Vite5、Pinia、arco.design开源的后台管理框架，使用目前最新技术栈开发。</p>
+        <p>MooX 一款基于 Vue、TypeScript、Vite5、Pinia、arco.design开源的后台管理框架，使用目前最新技术栈开发。</p>
         <p>融合了全新的UI框架，高度可自定义的主题功能使得用户可以根据自身需求轻松定制界面。</p>
         <p>代码全注释，可提供参考和学习。</p>
       </div>
@@ -40,12 +40,12 @@ const projectInfo: any = [
   {
     label: "GitHub",
     link: true,
-    value: "https://github.com/WANG-Fan0912/SnowAdmin"
+    value: ""
   },
   {
     label: "Gitee",
     link: true,
-    value: "https://gitee.com/wang_fan_w/SnowAdmin"
+    value: ""
   },
   {
     label: "文档地址",

@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-page">隐藏菜单</div>
+  <div class="moox-page">隐藏菜单</div>
 </template>
 
 <script setup lang="ts"></script>

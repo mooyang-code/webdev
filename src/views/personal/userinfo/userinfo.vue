@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <div class="my-avatar">
         <a-avatar :size="100">
           <img alt="avatar" :src="myImage" />
@@ -66,10 +66,7 @@ const list = reactive({
   ],
   callMe: [
     { label: "📧邮箱", value: "2547096351@qq.com", link: false },
-    { label: "📠微信", value: "fanction-w", link: false },
-    { label: "🛰️github", value: "兔子先森", link: true, url: "https://github.com/WANG-Fan0912" },
-    { label: "📚思否", value: "兔子先森", link: true, url: "https://segmentfault.com/blog/dcodes" },
-    { label: "✒️掘金", value: "兔子先森Ace", link: true, url: "https://juejin.cn/user/1728883023940600/posts" }
+    { label: "📠微信", value: "fanction-w", link: false }
   ],
   other: [
     { label: "🧭公众号", value: "DCodes" },

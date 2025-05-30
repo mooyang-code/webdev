@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-fill">
-    <div class="snow-fill-inner container">
+  <div class="moox-fill">
+    <div class="moox-fill-inner container">
       <div class="left-box">
         <a-input placeholder="请输入部门名称">
           <template #prefix>

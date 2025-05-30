@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-fill-pure">
+  <div class="moox-fill-pure">
     <div class="link-page-box">
       <div v-if="!isLoading" class="loading-page">
         <div class="dc-loader"></div>

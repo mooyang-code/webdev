@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-space wrap>
         <a-input v-model="form.name" placeholder="请输入任务名称" allow-clear />
         <a-select placeholder="执行状态" v-model="form.status" style="width: 120px" allow-clear>

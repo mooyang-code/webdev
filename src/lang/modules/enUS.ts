@@ -86,7 +86,7 @@ export default {
     ["vue"]: "vue",
     ["vite"]: "vite",
     ["github"]: "github",
-    ["SnowAdmin-Docs"]: "SnowAdmin-Docs",
+    ["MooX-Docs"]: "MooX-Docs",
     ["juejin"]: "juejin",
     ["disable-menu"]: "disable-menu",
     ["hide-menu"]: "hide-menu",
@@ -103,6 +103,12 @@ export default {
     ["functions"]: "functions",
     ["routing-operation"]: "routing operation",
     ["test-common-route"]: "test common route",
-    ["test-dynamic-route"]: "test dynamic route"
+    ["test-dynamic-route"]: "test dynamic route",
+    ["project"]: "project management",
+    ["create-project"]: "create project",
+    ["common-project"]: "project 1",
+    ["dataset"]: "dataset",
+    ["field-management"]: "field management",
+    ["storage-config"]: "storage config"
   }
 };

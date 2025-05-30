@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-space wrap>
         <a-input v-model="form.name" placeholder="请输入角色名称" allow-clear />
         <a-input v-model="form.code" placeholder="请输入角色标识" allow-clear />

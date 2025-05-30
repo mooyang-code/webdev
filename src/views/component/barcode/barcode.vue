@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-row :gutter="24">
         <a-col :span="15">
           <div class="code-box">
@@ -26,7 +26,7 @@ const codeList = ref([
   {
     id: 1,
     tag: "svg",
-    text: "SnowAdmin",
+    text: "MooX",
     docs: "CODE128-默认条形码",
     options: {
       format: "CODE128",
@@ -36,7 +36,7 @@ const codeList = ref([
   {
     id: 2,
     tag: "svg",
-    text: "SnowAdmin",
+    text: "MooX",
     docs: "自定义高度和颜色",
     options: {
       format: "CODE128",
@@ -48,7 +48,7 @@ const codeList = ref([
   {
     id: 3,
     tag: "svg",
-    text: "SnowAdmin",
+    text: "MooX",
     docs: "设置字体和倾斜",
     options: {
       format: "CODE128",
@@ -60,7 +60,7 @@ const codeList = ref([
   {
     id: 4,
     tag: "svg",
-    text: "SnowAdmin",
+    text: "MooX",
     docs: "CODE39-商品条形码",
     options: {
       format: "CODE39",

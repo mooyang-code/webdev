@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-space wrap>
         <a-input v-model="form.name" placeholder="请输入菜单名称" allow-clear />
         <a-select v-model="form.hide" placeholder="请选择显示状态" allow-clear style="width: 120px">

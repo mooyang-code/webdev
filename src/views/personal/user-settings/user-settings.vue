@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-page">
+  <div class="moox-page">
     <div class="container">
       <a-card :bordered="false">
         <a-row align="center">

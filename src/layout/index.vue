@@ -9,6 +9,8 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useThemeConfig } from "@/store/modules/theme-config";
+import { defineAsyncComponent } from "vue";
+import LangProvider from "@/components/lang-provider/index.vue";
 
 const themeStore = useThemeConfig();
 const { layoutType } = storeToRefs(themeStore);
@@ -21,4 +23,4 @@ const layouts: any = {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> 

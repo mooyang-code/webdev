@@ -4,7 +4,6 @@ import { resolve } from "path";
 import { include } from "./build/optimize";
 import postcssPresetEnv from "postcss-preset-env";
 import { createVitePlugins } from "./build/vite-plugin";
-// const themePath = normalizePath(path.normalize("./src/style/global-theme.scss"));
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,24 +12,8 @@ export default defineConfig(({ mode }) => {
   // 获取跟路径对应的文件
   const env: any = loadEnv(mode, root);
   return {
-    // 生产环境服务的公共基础路径-用于生出环境的代理的路径
-    base: env.VITE_PUBLIC_PATH,
-    server: {
-      // host: "0.0.0.0",
-      open: false,
-      // 为开发服务器配置自定义代理规则-用于开发时的代理
-      proxy: {
-        "/api": {
-          target: env.VITE_APP_BASE_URL,
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, "")
-        }
-      }
-    },
-    // 插件：路径build/vite-plugin
     plugins: createVitePlugins(env),
     resolve: {
-      // 配置别名-绝对路径
       alias: {
         "@assets": path.join(__dirname, "src/assets"),
         "@": resolve(__dirname, "./src")
@@ -73,6 +56,18 @@ export default defineConfig(({ mode }) => {
           chunkFileNames: "static/js/[name]-[hash].js",
           entryFileNames: "static/js/[name]-[hash].js",
           assetFileNames: "static/[ext]/[name]-[hash].[ext]"
+        }
+      }
+    },
+    server: {
+      // host: "0.0.0.0",
+      open: false,
+      // 为开发服务器配置自定义代理规则-用于开发时的代理
+      proxy: {
+        "/api": {
+          target: env.VITE_APP_BASE_URL,
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, "")
         }
       }
     }

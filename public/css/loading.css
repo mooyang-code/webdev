@@ -12,8 +12,8 @@ body {
   justify-content: center;
   background: #fff;
 }
-/* HTML: <div class="snow-loader"></div> */
-.snow-loader {
+/* HTML: <div class="moox-loader"></div> */
+.moox-loader {
   width: 45px;
   aspect-ratio: 1;
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-space wrap>
         <a-input v-model="form.loginLocation" placeholder="请输入登录地址" allow-clear />
         <a-input v-model="form.userName" placeholder="请输入账户名称" allow-clear />

@@ -1,12 +1,12 @@
 <template>
   <a-layout-footer class="footer">
-    <div class="footer_title" @click="onFooter">2024 © SnowAdmin by 兔子先森</div>
+    <div class="footer_title" @click="onFooter">2024 © MooX by 兔子先森</div>
   </a-layout-footer>
 </template>
 
 <script setup lang="ts">
 const onFooter = () => {
-  window.open("https://github.com/WANG-Fan0912/SnowAdmin", "_blank");
+  window.open("", "_blank");
 };
 </script>
 

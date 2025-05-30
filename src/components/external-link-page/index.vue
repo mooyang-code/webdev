@@ -1,5 +1,5 @@
 <template>
-  <div class="snow-page">
+  <div class="moox-page">
     <div class="external-link-page">
       <div class="external-link-inner-page">
         <div>

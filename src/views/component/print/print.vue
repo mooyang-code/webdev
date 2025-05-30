@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner">
+  <div class="moox-page">
+    <div class="moox-inner">
       <a-space direction="vertical">
         <div style="margin-top: -40px">
           <a-typography id="myTypography">

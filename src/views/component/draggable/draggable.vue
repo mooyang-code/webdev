@@ -1,6 +1,6 @@
 <template>
-  <div class="snow-page">
-    <div class="snow-inner draggable-page">
+  <div class="moox-page">
+    <div class="moox-inner draggable-page">
       <a-row :gutter="16">
         <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="12" :xxl="12">
           <a-space direction="vertical">

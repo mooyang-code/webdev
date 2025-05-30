@@ -182,7 +182,7 @@ const onUpdate = () => {
 
 // 项目地址
 const onProject = () => {
-  window.open("https://github.com/WANG-Fan0912/SnowAdmin", "_blank");
+  window.open("", "_blank");
 };
 
 // 退出登录
