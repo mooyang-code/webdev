@@ -17,15 +17,6 @@
             <a-form ref="formRef" auto-label-width :model="form" :rules="rules" @submit="handleSubmit">
               <!-- 步骤1：基本信息 -->
               <div v-if="currentStep == 1">
-                <a-form-item field="projectId" label="项目ID">
-                  <a-input 
-                    v-model="form.projectId" 
-                    placeholder="请输入项目ID（纯数字）" 
-                    @input="validateProjectId"
-                    :status="projectIdStatus"
-                    :error="projectIdError"
-                  />
-                </a-form-item>
                 <a-form-item field="projectName" label="项目名">
                   <a-input v-model="form.projectName" placeholder="请输入项目名" />
                 </a-form-item>
@@ -36,15 +27,6 @@
 
               <!-- 步骤2：数据集 -->
               <div v-if="currentStep == 2">
-                <a-form-item field="datasetId" label="数据集ID">
-                  <a-input 
-                    v-model="form.datasetId" 
-                    placeholder="请输入数据集ID（纯数字，前缀为项目ID）" 
-                    @input="validateDatasetId"
-                    :status="datasetIdStatus"
-                    :error="datasetIdError"
-                  />
-                </a-form-item>
                 <a-form-item field="datasetName" label="数据集名">
                   <template #label>
                     <span>数据集名</span>
@@ -78,11 +60,6 @@
                 </a-form-item>
                 <a-form-item field="fieldNameEn" label="字段英文名">
                   <a-input v-model="form.fieldNameEn" placeholder="请输入字段英文名" />
-                </a-form-item>
-                <a-form-item field="mountedDatasetIds" label="挂载数据集ID">
-                  <a-select v-model="form.mountedDatasetIds" placeholder="请选择数据集ID" multiple>
-                    <a-option :value="form.datasetId">{{ form.datasetName }}</a-option>
-                  </a-select>
                 </a-form-item>
                 <a-form-item field="fieldDescription" label="字段描述">
                   <a-input v-model="form.fieldDescription" placeholder="请输入字段描述" />
@@ -228,7 +205,7 @@
             <a-typography style="padding: 24px; background: var(--color-fill-2)">
               <a-typography-paragraph>提示</a-typography-paragraph>
               <ul>
-                <li>创建项目成功，请刷新页面。</li>
+                <li>创建项目成功，项目ID为 {{ createdProjectId }}，请刷新页面。</li>
               </ul>
             </a-typography>
           </a-col>
@@ -240,6 +217,7 @@
 
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue';
+import { api, AUTH_INFO } from '@/api/config';
 
 const loading = ref(false);
 const currentStep = ref(1);
@@ -247,6 +225,60 @@ const projectIdStatus = ref<'normal' | 'error'>('normal');
 const projectIdError = ref('');
 const datasetIdStatus = ref<'normal' | 'error'>('normal');
 const datasetIdError = ref('');
+const createdProjectId = ref('');
+
+// 获取当前页面的IP地址
+const getCurrentHost = () => {
+  const url = window.location.href;
+  const urlObj = new URL(url);
+  return urlObj.hostname;
+};
+
+// 提交项目数据到后台
+const submitProjectData = async () => {
+  try {
+    const projectData = {
+      auth_info: AUTH_INFO,
+      proj_name: form.value.projectName,
+      remark: form.value.projectRemark,
+      dataset: {
+        dataset_name: form.value.datasetName,
+        data_type: parseInt(form.value.dataType),
+        time_series_period: form.value.timePeriod,
+        validation_rule: form.value.validationRules,
+        remark: form.value.datasetRemark
+      },
+      fields: [{
+        field_name: form.value.fieldNameCn,
+        interface_name: form.value.fieldNameEn,
+        desc: form.value.fieldDescription,
+        is_required: form.value.isRequired,
+        is_unique: form.value.isUnique,
+        is_metadata: form.value.isMetadata,
+        validation_rule: form.value.fieldValidationRules,
+        write_example: form.value.writeExample,
+        remark: form.value.fieldRemark,
+        field_primary_format: parseInt(form.value.primaryFormat),
+        field_secondary_format: parseInt(form.value.secondaryFormat)
+      }]
+    };
+
+    const response = await api.post('/trpc.storage.metadata.MetaAdmin/CreateProject', projectData);
+    createdProjectId.value = response.proj_id;
+    Message.success({
+      content: '项目创建成功',
+      duration: 3000
+    });
+    return true;
+  } catch (error: any) {
+    console.error('API Error:', error);
+    Message.error({
+      content: error.msg || '项目创建失败',
+      duration: 3000
+    });
+    return false;
+  }
+};
 
 // 表单提交时的验证
 const handleSubmit = async ({ errors }: ArcoDesign.ArcoSubmit) => {
@@ -276,9 +308,10 @@ const handleSubmit = async ({ errors }: ArcoDesign.ArcoSubmit) => {
   if (currentStep.value == 3) {
     loading.value = true;
     try {
-      // 模拟提交成功
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      currentStep.value += 1;
+      const success = await submitProjectData();
+      if (success) {
+        currentStep.value += 1;
+      }
     } finally {
       loading.value = false;
     }
@@ -287,76 +320,12 @@ const handleSubmit = async ({ errors }: ArcoDesign.ArcoSubmit) => {
   }
 };
 
-// 验证项目ID
-const validateProjectId = (value: string) => {
-  if (!value) {
-    projectIdStatus.value = 'error';
-    projectIdError.value = '请输入项目ID';
-    Message.error({
-      content: '请输入项目ID',
-      duration: 3000
-    });
-    return;
-  }
-  
-  if (!/^\d+$/.test(value)) {
-    projectIdStatus.value = 'error';
-    projectIdError.value = '项目ID必须为纯数字';
-    Message.error({
-      content: '项目ID必须为纯数字',
-      duration: 3000
-    });
-    return;
-  }
-  
-  projectIdStatus.value = 'normal';
-  projectIdError.value = '';
-};
-
-// 验证数据集ID
-const validateDatasetId = (value: string) => {
-  if (!value) {
-    datasetIdStatus.value = 'error';
-    datasetIdError.value = '请输入数据集ID';
-    Message.error({
-      content: '请输入数据集ID',
-      duration: 3000
-    });
-    return;
-  }
-  
-  if (!/^\d+$/.test(value)) {
-    datasetIdStatus.value = 'error';
-    datasetIdError.value = '数据集ID必须为纯数字';
-    Message.error({
-      content: '数据集ID必须为纯数字',
-      duration: 3000
-    });
-    return;
-  }
-  
-  if (!value.startsWith(form.value.projectId)) {
-    datasetIdStatus.value = 'error';
-    datasetIdError.value = '数据集ID必须以项目ID为前缀';
-    Message.error({
-      content: '数据集ID必须以项目ID为前缀',
-      duration: 3000
-    });
-    return;
-  }
-  
-  datasetIdStatus.value = 'normal';
-  datasetIdError.value = '';
-};
-
 const form = ref({
   // 步骤1：基本信息
-  projectId: "",
   projectName: "",
   projectRemark: "",
   
   // 步骤2：数据集
-  datasetId: "",
   datasetName: "",
   dataType: null,
   timePeriod: "",
@@ -366,7 +335,6 @@ const form = ref({
   // 步骤3：主键配置
   fieldNameCn: "",
   fieldNameEn: "",
-  mountedDatasetIds: [],
   fieldDescription: "",
   isRequired: false,
   isUnique: false,
@@ -380,26 +348,10 @@ const form = ref({
 
 const rules = ref({
   // 步骤1：基本信息
-  projectId: [
-    { required: true, message: "请输入项目ID" },
-    { pattern: /^\d+$/, message: "项目ID必须为纯数字" }
-  ],
   projectName: [{ required: true, message: "请输入项目名" }],
   projectRemark: [{ required: true, message: "请输入备注" }],
   
   // 步骤2：数据集
-  datasetId: [
-    { required: true, message: "请输入数据集ID" },
-    { pattern: /^\d+$/, message: "数据集ID必须为纯数字" },
-    {
-      validator: (value: string) => {
-        if (!value.startsWith(form.value.projectId)) {
-          return Promise.reject("数据集ID必须以项目ID为前缀");
-        }
-        return Promise.resolve();
-      }
-    }
-  ],
   datasetName: [{ required: true, message: "请输入数据集名" }],
   dataType: [{ required: true, message: "请选择数据类型" }],
   timePeriod: [{ required: true, message: "请输入时序周期", trigger: "blur" }],
@@ -408,7 +360,6 @@ const rules = ref({
   // 步骤3：主键配置
   fieldNameCn: [{ required: true, message: "请输入字段中文名" }],
   fieldNameEn: [{ required: true, message: "请输入字段英文名" }],
-  mountedDatasetIds: [{ required: true, message: "请选择挂载数据集ID" }],
   fieldDescription: [{ required: true, message: "请输入字段描述" }],
   fieldRemark: [{ required: true, message: "请输入备注" }],
   primaryFormat: [{ required: true, message: "请选择字段主要类型" }],
