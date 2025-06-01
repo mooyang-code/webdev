@@ -67,12 +67,19 @@ const fetchProjects = async () => {
 
 // 处理菜单点击事件
 const handleMenuClick = (project: Project, menuType: string) => {
-  router.push({
-    path: `/project/${project.name}/${menuType}`,
-    query: {
-      projectId: project.id
-    }
-  });
+  if (menuType === 'dataset') {
+    router.push({
+      path: `/project/${project.id}/dataset`
+    });
+  } else if (menuType === 'field-management') {
+    router.push({
+      path: `/project/${project.id}/field-management`
+    });
+  } else if (menuType === 'storage-config') {
+    router.push({
+      path: `/project/${project.id}/storage-config`
+    });
+  }
 };
 
 onMounted(() => {

@@ -44,7 +44,14 @@ export const staticRoutes = [
     redirect: HOME_PATH,
     component: Layout, // 容器布局-顶层路由
     // 二级路由-主要渲染页面
-    children: []
+    children: [
+      {
+        path: "/project/:projectId/dataset",
+        name: "dataset",
+        component: () => import("@/views/project/dataset/dataset.vue"),
+        meta: { title: "数据集" }
+      }
+    ]
   }
   /**
    * 提示：写在这里的为全屏界面，不建议写在这里非全屏界面，请写在 layout.children 路由数组中

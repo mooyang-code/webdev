@@ -83,7 +83,6 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin", "common"],
       svgIcon: "classify",
-      icon: "",
       sort: 2,
       type: 1 // 设置为目录类型
     },
@@ -113,11 +112,11 @@ export const systemMenu = [
   {
     id: "0202",
     parentId: "02",
-    path: "/project/common-project",
-    name: "common-project",
-    redirect: "/project/common-project/dataset",
+    path: "/project/:projectId",
+    name: "project-detail",
+    redirect: "/project/:projectId/dataset",
     meta: {
-      title: "common-project",
+      title: "project-detail",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -129,70 +128,71 @@ export const systemMenu = [
       sort: 2,
       type: 1
     },
-    children: null
-  },
-  {
-    id: "020201",
-    parentId: "0202",
-    path: "/project/common-project/dataset",
-    name: "dataset",
-    component: "project/dataset/dataset",
-    meta: {
-      title: "dataset",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 1,
-      type: 2
-    },
-    children: null
-  },
-  {
-    id: "020202",
-    parentId: "0202",
-    path: "/project/common-project/field-management",
-    name: "field-management",
-    component: "project/field-management/field-management",
-    meta: {
-      title: "field-management",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 2,
-      type: 2
-    },
-    children: null
-  },
-  {
-    id: "020203",
-    parentId: "0202",
-    path: "/project/common-project/storage-config",
-    name: "storage-config",
-    component: "project/storage-config/storage-config",
-    meta: {
-      title: "storage-config",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 3,
-      type: 2
-    },
-    children: null
+    children: [
+      {
+        id: "020201",
+        parentId: "0202",
+        path: "/project/:projectId/dataset",
+        name: "dataset",
+        component: "project/dataset/dataset",
+        meta: {
+          title: "dataset",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 1,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "020202",
+        parentId: "0202",
+        path: "/project/:projectId/field-management",
+        name: "field-management",
+        component: "project/field-management/field-management",
+        meta: {
+          title: "field-management",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 2,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "020203",
+        parentId: "0202",
+        path: "/project/:projectId/storage-config",
+        name: "storage-config",
+        component: "project/storage-config/storage-config",
+        meta: {
+          title: "storage-config",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 3,
+          type: 2
+        },
+        children: null
+      }
+    ]
   },
   
   
