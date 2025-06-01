@@ -68,24 +68,24 @@ export const systemMenu = [
   },
 
   {
-    id: "02", // 路由id
-    parentId: "0", // 顶层路由 parentId: 0
-    path: "/project", // 路由path
-    name: "project", // 路由name
+    id: "02",
+    parentId: "0",
+    path: "/project",
+    name: "project",
     redirect: "/project/create-project",
     meta: {
-      title: "project", // 国际化key，无对应Key则直接展示
-      hide: false, // 是否隐藏此路由-不显示但可访问
-      disable: false, // 是否停用此路由-不显示且不可访问
-      keepAlive: false, // 是否缓存组件
-      affix: true, // 固定在Tabs栏上-开启后Tabs栏无关闭按钮
-      link: "", // 是否外链
-      iframe: false, // 是否内嵌外链窗口
-      roles: ["admin", "common"], // 路由角色权限
-      svgIcon: "classify", //（classify 使用组件管理的图标） svg菜单图标，优先级高于icon，取src/assets/svgs内的svg文件
-      icon: "", // 普通icon菜单图标，默认取arco.design图标
-      sort: 2, // 排序字段
-      type: 1 // type 1目录 2菜单 3按钮
+      title: "project",
+      hide: false,
+      disable: false,
+      keepAlive: true,
+      affix: false,
+      link: "",
+      iframe: false,
+      roles: ["admin", "common"],
+      svgIcon: "classify",
+      icon: "",
+      sort: 2,
+      type: 1 // 设置为目录类型
     },
     children: null
   },

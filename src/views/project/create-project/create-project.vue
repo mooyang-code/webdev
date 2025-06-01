@@ -234,6 +234,14 @@ const getCurrentHost = () => {
   return urlObj.hostname;
 };
 
+interface CreateProjectResponse {
+  ret_info: {
+    code: number;
+    msg: string;
+  };
+  proj_id: string;
+}
+
 // 提交项目数据到后台
 const submitProjectData = async () => {
   try {
@@ -263,8 +271,8 @@ const submitProjectData = async () => {
       }]
     };
 
-    const response = await api.post('/trpc.storage.metadata.MetaAdmin/CreateProject', projectData);
-    createdProjectId.value = response.proj_id;
+    const { data } = await api.post<CreateProjectResponse>('/trpc.storage.metadata.MetaAdmin/CreateProject', projectData);
+    createdProjectId.value = data.proj_id;
     Message.success({
       content: '项目创建成功',
       duration: 3000
@@ -327,7 +335,7 @@ const form = ref({
   
   // 步骤2：数据集
   datasetName: "",
-  dataType: null,
+  dataType: "",
   timePeriod: "",
   validationRules: "",
   datasetRemark: "",
@@ -342,8 +350,8 @@ const form = ref({
   fieldValidationRules: "",
   writeExample: "",
   fieldRemark: "",
-  primaryFormat: null,
-  secondaryFormat: null
+  primaryFormat: "",
+  secondaryFormat: ""
 });
 
 const rules = ref({

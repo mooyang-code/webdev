@@ -1,202 +1,209 @@
 <template>
   <div class="moox-page">
     <div class="moox-inner">
-      <a-row :gutter="16">
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
-          <a-form ref="formRef" auto-label-width :size="form.size" :model="form" @submit="handleSubmit">
-            <a-form-item field="size" label="表单大小">
-              <a-radio-group v-model="form.size" type="button">
-                <a-radio value="mini">迷你</a-radio>
-                <a-radio value="small">偏小</a-radio>
-                <a-radio value="medium">中等</a-radio>
-                <a-radio value="large">偏大</a-radio>
-              </a-radio-group>
-            </a-form-item>
-            <a-form-item
-              field="name"
-              label="用户名称"
-              :rules="[
-                { required: true, message: '用户名称不能为空' },
-                { minLength: 5, message: '必须大于 5 个字符' }
-              ]"
-              :validate-trigger="['change', 'input']"
-            >
-              <a-input :style="{ width: '100%' }" v-model="form.name" placeholder="请输入用户名称" allow-clear />
-            </a-form-item>
-            <a-form-item
-              field="age"
-              label="年龄"
-              :rules="[
-                { required: true, message: '年龄为必填项' },
-                { type: 'number', max: 200, message: '年龄上限为 200 岁' }
-              ]"
-            >
-              <a-input-number v-model="form.age" placeholder="请输入您的年龄" allow-clear />
-            </a-form-item>
-            <a-form-item field="section" label="选项" :rules="[{ required: true, message: '选项不能为空' }]">
-              <a-select v-model="form.section" placeholder="请选择" allow-clear>
-                <a-option value="section one">Section One</a-option>
-                <a-option value="section two">Section Two</a-option>
-                <a-option value="section three">Section Three</a-option>
-              </a-select>
-            </a-form-item>
-            <a-form-item field="province" label="地区" :rules="[{ required: true, message: '地区不能为空' }]">
-              <a-cascader v-model="form.province" :options="options" placeholder="请选择地区" allow-clear />
-            </a-form-item>
-            <a-form-item field="options" label="爱好" :rules="[{ type: 'array', minLength: 2, message: '请选择' }]">
-              <a-checkbox-group v-model="form.options">
-                <a-checkbox value="option one">听歌</a-checkbox>
-                <a-checkbox value="option two">看电影</a-checkbox>
-                <a-checkbox value="option three">旅游</a-checkbox>
-                <a-checkbox value="option four">电竞</a-checkbox>
-              </a-checkbox-group>
-            </a-form-item>
-            <a-form-item field="date" label="日期">
-              <a-date-picker v-model="form.date" placeholder="请选择日期" />
-            </a-form-item>
-            <a-form-item field="time" label="时间">
-              <a-time-picker v-model="form.time" placeholder="请选择时间" />
-            </a-form-item>
-            <a-form-item field="radio" label="性别" :rules="[{ required: true, message: '性别不能为空' }]">
-              <a-radio-group v-model="form.radio">
-                <a-radio value="man">男</a-radio>
-                <a-radio value="woman">女</a-radio>
-              </a-radio-group>
-            </a-form-item>
-            <a-form-item field="slider" label="进度" :rules="[{ type: 'number', min: 5, message: '最小为5' }]">
-              <a-slider v-model="form.slider" :max="10" />
-            </a-form-item>
-            <a-form-item field="score" label="评分">
-              <a-rate v-model="form.score" allow-clear />
-            </a-form-item>
-            <a-form-item field="switch" label="状态" :rules="[{ type: 'boolean', true: true, message: '请打开开关' }]">
-              <a-switch v-model="form.switch" />
-            </a-form-item>
-            <a-form-item field="multiSelect" label="多选">
-              <a-select v-model="form.multiSelect" placeholder="请选择" multiple>
-                <a-option value="section one">多选一</a-option>
-                <a-option value="section two">多选二</a-option>
-                <a-option value="section three">多选三</a-option>
-              </a-select>
-            </a-form-item>
-            <a-form-item field="treeSelect" label="分组">
-              <a-tree-select :data="treeData" v-model="form.treeSelect" placeholder="请选择分组" />
-            </a-form-item>
-            <a-form-item>
+      <a-spin :loading="loading">
+        <template v-if="currentProject && currentDataset">
+          <a-card :title="currentProject.name" :subtitle="'数据集: ' + currentDataset.dataset_name">
+            <template #extra>
               <a-space>
-                <a-button html-type="submit">提交</a-button>
-                <a-button @click="onReset">重置</a-button>
+                <a-button type="primary" @click="handleAddData">
+                  <template #icon><icon-plus /></template>
+                  添加数据
+                </a-button>
+                <a-button @click="handleRefresh">
+                  <template #icon><icon-refresh /></template>
+                  刷新
+                </a-button>
               </a-space>
-            </a-form-item>
-          </a-form>
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
-          <CodeView :code-json="codeJson" />
-        </a-col>
-      </a-row>
+            </template>
+            
+            <a-descriptions :column="2" bordered>
+              <a-descriptions-item label="数据集ID">{{ currentDataset.dataset_id }}</a-descriptions-item>
+              <a-descriptions-item label="数据类型">
+                {{ currentDataset.data_type === 1 ? '静态数据' : '时序数据' }}
+              </a-descriptions-item>
+              <a-descriptions-item label="时序周期" v-if="currentDataset.data_type === 2">
+                {{ currentDataset.time_series_period }}
+              </a-descriptions-item>
+              <a-descriptions-item label="数据校验规则">
+                {{ currentDataset.validation_rule || '无' }}
+              </a-descriptions-item>
+              <a-descriptions-item label="备注" :span="2">
+                {{ currentDataset.remark || '无' }}
+              </a-descriptions-item>
+            </a-descriptions>
+
+            <!-- 数据列表 -->
+            <div class="margin-top">
+              <a-table
+                :data="tableData"
+                :loading="tableLoading"
+                :pagination="pagination"
+                @page-change="onPageChange"
+                @page-size-change="onPageSizeChange"
+              >
+                <template #columns>
+                  <a-table-column title="ID" data-index="id" />
+                  <a-table-column title="创建时间" data-index="create_time" />
+                  <a-table-column title="操作" align="center">
+                    <template #cell="{ record }">
+                      <a-space>
+                        <a-button type="text" size="small" @click="handleEdit(record)">
+                          <template #icon><icon-edit /></template>
+                          编辑
+                        </a-button>
+                        <a-button type="text" status="danger" size="small" @click="handleDelete(record)">
+                          <template #icon><icon-delete /></template>
+                          删除
+                        </a-button>
+                      </a-space>
+                    </template>
+                  </a-table-column>
+                </template>
+              </a-table>
+            </div>
+          </a-card>
+        </template>
+        <template v-else>
+          <a-result status="404" subtitle="未找到项目或数据集信息">
+            <template #extra>
+              <a-button type="primary" @click="router.push('/project/create-project')">
+                创建新项目
+              </a-button>
+            </template>
+          </a-result>
+        </template>
+      </a-spin>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const handleSubmit = ({ values, errors }: any) => {
-  console.log("values:", values, "\nerrors:", errors);
-};
-// 将序列化的字符串美观输出，\t 换行
-const codeJson = computed(() => JSON.stringify(form, null, "\t"));
-const form = reactive({
-  size: "medium",
-  name: "",
-  age: undefined,
-  section: "",
-  province: "guanggu",
-  options: [],
-  date: "",
-  time: "",
-  radio: "man",
-  slider: 5,
-  score: 5,
-  switch: false,
-  multiSelect: ["section one"],
-  treeSelect: "node1"
-});
-const options = [
-  {
-    value: "hubei",
-    label: "湖北",
-    children: [
-      {
-        value: "wuhan",
-        label: "武汉",
-        children: [
-          {
-            value: "guanggu",
-            label: "光谷"
-          }
-        ]
-      },
-      {
-        value: "xiaogan",
-        label: "孝感"
-      },
-      {
-        value: "huanggang",
-        label: "黄冈"
-      },
-      {
-        value: "xianning",
-        label: "咸宁"
-      }
-    ]
-  },
-  {
-    value: "hunan",
-    label: "湖南",
-    children: [
-      {
-        value: "changsha",
-        label: "长沙",
-        children: [
-          {
-            value: "yuelu",
-            label: "岳麓"
-          }
-        ]
-      }
-    ]
-  }
-];
-const treeData = [
-  {
-    key: "node1",
-    title: "分组01",
-    children: [
-      {
-        key: "node1-01",
-        title: "分组01-01"
-      }
-    ]
-  },
-  {
-    key: "node2",
-    title: "分组02",
-    children: [
-      {
-        key: "node2-01",
-        title: "分组02-01"
-      },
-      {
-        key: "node2-01",
-        title: "分组02-02"
-      }
-    ]
-  }
-];
+import { ref, onMounted, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { Message } from '@arco-design/web-vue';
+import { listProjects, type Project, type Dataset } from '@/api/project';
 
-const formRef = ref();
-const onReset = () => {
-  formRef.value.resetFields();
+const route = useRoute();
+const router = useRouter();
+const loading = ref(false);
+const tableLoading = ref(false);
+
+// 定义表格数据类型
+interface TableDataItem {
+  id: number;
+  create_time: string;
+}
+
+const tableData = ref<TableDataItem[]>([]);
+
+// 分页配置
+const pagination = ref({
+  total: 0,
+  current: 1,
+  pageSize: 10,
+  showTotal: true,
+  showJumper: true,
+  showPageSize: true
+});
+
+// 获取当前项目和数据集信息
+const currentProject = computed(() => {
+  const projectId = Number(route.query.projectId);
+  return projects.value.find(p => p.id === projectId);
+});
+
+const currentDataset = computed(() => {
+  const datasetId = Number(route.query.datasetId);
+  return currentProject.value?.datasets.find(d => d.dataset_id === datasetId);
+});
+
+// 项目列表
+const projects = ref<Project[]>([]);
+
+// 获取项目列表
+const fetchProjects = async () => {
+  loading.value = true;
+  try {
+    projects.value = await listProjects();
+  } catch (error) {
+    console.error('获取项目列表失败:', error);
+    Message.error('获取项目列表失败');
+  } finally {
+    loading.value = false;
+  }
 };
+
+// 获取数据集数据
+const fetchDatasetData = async () => {
+  if (!currentProject.value || !currentDataset.value) return;
+  
+  tableLoading.value = true;
+  try {
+    // TODO: 实现获取数据集数据的API调用
+    // const response = await api.getDatasetData({
+    //   projectId: currentProject.value.id,
+    //   datasetId: currentDataset.value.dataset_id,
+    //   page: pagination.value.current,
+    //   pageSize: pagination.value.pageSize
+    // });
+    // tableData.value = response.data;
+    // pagination.value.total = response.total;
+    
+    // 临时模拟数据
+    tableData.value = Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      create_time: new Date().toLocaleString()
+    }));
+    pagination.value.total = 100;
+  } catch (error) {
+    console.error('获取数据集数据失败:', error);
+    Message.error('获取数据集数据失败');
+  } finally {
+    tableLoading.value = false;
+  }
+};
+
+// 页面变化处理
+const onPageChange = (page: number) => {
+  pagination.value.current = page;
+  fetchDatasetData();
+};
+
+const onPageSizeChange = (pageSize: number) => {
+  pagination.value.pageSize = pageSize;
+  pagination.value.current = 1;
+  fetchDatasetData();
+};
+
+// 操作处理函数
+const handleAddData = () => {
+  // TODO: 实现添加数据的逻辑
+  Message.info('添加数据功能开发中');
+};
+
+const handleEdit = (record: any) => {
+  // TODO: 实现编辑数据的逻辑
+  Message.info('编辑数据功能开发中');
+};
+
+const handleDelete = (record: any) => {
+  // TODO: 实现删除数据的逻辑
+  Message.info('删除数据功能开发中');
+};
+
+const handleRefresh = () => {
+  fetchDatasetData();
+};
+
+onMounted(() => {
+  fetchProjects();
+  fetchDatasetData();
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.margin-top {
+  margin-top: 16px;
+}
+</style>
