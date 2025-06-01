@@ -234,12 +234,10 @@ const getCurrentHost = () => {
   return urlObj.hostname;
 };
 
-interface CreateProjectResponse {
-  ret_info: {
-    code: number;
-    msg: string;
-  };
-  proj_id: string;
+interface CreateProjectResponseData {
+  code: number;
+  message: string;
+  proj_id: number;
 }
 
 // 提交项目数据到后台
@@ -271,17 +269,49 @@ const submitProjectData = async () => {
       }]
     };
 
-    const { data } = await api.post<CreateProjectResponse>('/trpc.storage.metadata.MetaAdmin/CreateProject', projectData);
-    createdProjectId.value = data.proj_id;
+    console.log('提交项目数据:', projectData);
+    
+    const response = await api.post('/trpc.storage.metadata.MetaAdmin/CreateProject', projectData);
+    console.log('API响应:', response);
+    
+    // 现在 response.data 直接是精简后的协议数据
+    const data = response.data as CreateProjectResponseData;
+    console.log('协议数据:', data);
+    
+    // 检查协议级别的错误（非0表示错误）
+    if (data.code !== 0) {
+      throw new Error(data.message || '项目创建失败');
+    }
+    
+    // 检查是否有项目ID
+    if (!data.proj_id) {
+      throw new Error('未返回项目ID');
+    }
+    
+    createdProjectId.value = data.proj_id.toString();
     Message.success({
-      content: '项目创建成功',
+      content: data.message || '项目创建成功',
       duration: 3000
     });
     return true;
   } catch (error: any) {
     console.error('API Error:', error);
+    
+    let errorMessage = '项目创建失败';
+    
+    if (!error) {
+      errorMessage = '未知错误：API调用返回undefined';
+    } else if (error.response?.data?.message) {
+      // HTTP错误响应，使用协议中的消息
+      errorMessage = error.response.data.message;
+    } else if (error.message) {
+      errorMessage = error.message;
+    } else if (typeof error === 'string') {
+      errorMessage = error;
+    }
+    
     Message.error({
-      content: error.msg || '项目创建失败',
+      content: errorMessage,
       duration: 3000
     });
     return false;

@@ -28,12 +28,20 @@ export const api = axios.create({
 api.interceptors.response.use(
   (response) => {
     const { data } = response;
-    if (data?.ret_info?.code === 0) {
-      return data;
+    
+    // 检查是否为旧协议格式（有 ret_info 字段）
+    if (data?.ret_info) {
+      if (data.ret_info.code === 0) {
+        return data;
+      }
+      return Promise.reject(data.ret_info);
     }
-    return Promise.reject(data?.ret_info);
+    
+    // 新协议格式：已经简化，直接返回
+    return response;
   },
   (error) => {
+    // 保持原有错误处理逻辑
     return Promise.reject(error.response?.data?.ret_info || error);
   }
 ); 
