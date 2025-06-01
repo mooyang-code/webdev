@@ -50,6 +50,12 @@ export const staticRoutes = [
         name: "dataset",
         component: () => import("@/views/project/dataset/dataset.vue"),
         meta: { title: "数据集" }
+      },
+      {
+        path: "/project/:projectId/field-management",
+        name: "field-management",
+        component: () => import("@/views/project/field-management/field-management.vue"),
+        meta: { title: "字段管理" }
       }
     ]
   }
