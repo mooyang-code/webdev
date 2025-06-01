@@ -64,7 +64,7 @@ const data = ref([
   },
   {
     label: "用户昵称：",
-    value: "兔子先森"
+    value: "Moo"
   },
   {
     label: "角色：",
@@ -88,7 +88,7 @@ const data = ref([
   },
   {
     label: "注册时间：",
-    value: "2024-06-20"
+    value: "2025-06-20"
   }
 ]);
 

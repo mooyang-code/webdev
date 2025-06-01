@@ -48,7 +48,7 @@ const proxy = useGlobalProperties();
 const form = ref({
   userId: "1000001",
   username: "admin",
-  nickname: "兔子先森",
+  nickname: "Moo",
   role: "系统管理员",
   address: "guanggu",
   introduce: ""

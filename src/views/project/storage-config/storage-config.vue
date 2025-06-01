@@ -88,7 +88,7 @@ const fetchData = async () => {
         storageType: 'local',
         status: true,
         description: '本地文件系统存储',
-        updateTime: '2024-03-20 10:00:00',
+        updateTime: '2025-03-20 10:00:00',
       },
       {
         id: 2,
@@ -96,7 +96,7 @@ const fetchData = async () => {
         storageType: 's3',
         status: false,
         description: 'Amazon S3存储',
-        updateTime: '2024-03-20 10:00:00',
+        updateTime: '2025-03-20 10:00:00',
       },
     ];
     pagination.value.total = 2;

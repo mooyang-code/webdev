@@ -54,7 +54,7 @@ const data = ref([
   },
   {
     label: "用户昵称：",
-    value: "兔子先森"
+    value: "Moo"
   },
   {
     label: "角色：",
@@ -78,7 +78,7 @@ const data = ref([
   },
   {
     label: "注册时间：",
-    value: "2024-06-20"
+    value: "2025-06-20"
   }
 ]);
 
@@ -115,21 +115,21 @@ const tableData = reactive([
     authenticationType: "证件认证",
     authenticationContent: "实名认证，鉴定信息",
     status: "0",
-    createTime: "2024-06-20 17:35:25"
+    createTime: "2025-06-20 17:35:25"
   },
   {
     key: "2",
     authenticationType: "证件认证",
     authenticationContent: "实名认证，鉴定信息",
     status: "1",
-    createTime: "2024-06-08 15:25:37"
+    createTime: "2025-06-08 15:25:37"
   },
   {
     key: "3",
     authenticationType: "证件认证",
     authenticationContent: "实名认证，鉴定信息",
     status: "1",
-    createTime: "2024-06-01 10:55:21"
+    createTime: "2025-06-01 10:55:21"
   }
 ]);
 </script>

@@ -6,7 +6,7 @@
           <img alt="avatar" :src="myImage" />
         </a-avatar>
         <div class="my-name">
-          <div class="my-title title-size-1">兔子先森</div>
+          <div class="my-title title-size-1">Moo</div>
           <div class="my-local"><icon-location />浙江杭州</div>
         </div>
       </div>
@@ -73,7 +73,7 @@ const list = reactive({
     { label: "🌟公众号二维码", value: "" }
   ],
   introduce: [
-    { label: "👋欢迎来到兔子先森的project，记录思考成长，一起进步" },
+    { label: "👋欢迎来到Moo的project，记录思考成长，一起进步" },
     { label: "🔖长期主义者一枚，持续学习拓展思维及方法论" },
     { label: "🤔行业瞬息万变，时刻关注行业最新资讯" },
     { label: "🤝职场相处沟通都需要技巧，持续记录学习职场二三事" },

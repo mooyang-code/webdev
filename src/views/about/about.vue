@@ -35,7 +35,7 @@ const projectInfo: any = [
   {
     label: "发布时间",
     link: false,
-    value: "2024-06-18"
+    value: "2025-06-18"
   },
   {
     label: "GitHub",

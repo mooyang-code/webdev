@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import myImage from "@/assets/img/my-image.jpg";
 const data = ref([
-  { id: 100, img: "", time: "1分钟前", nickname: "兔子先森", content: "一键三连" },
+  { id: 100, img: "", time: "1分钟前", nickname: "Moo", content: "一键三连" },
   { id: 120, img: "", time: "1小时前", nickname: "捷克大力士", content: "与你握手问好" },
   { id: 130, img: "", time: "2小时前", nickname: "forever", content: "you forever" }
 ]);

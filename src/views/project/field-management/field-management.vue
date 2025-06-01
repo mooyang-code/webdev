@@ -67,7 +67,7 @@ const fetchData = async () => {
         fieldType: 'string',
         required: true,
         description: '名称字段',
-        createTime: '2024-03-20 10:00:00',
+        createTime: '2025-03-20 10:00:00',
       },
       {
         id: 2,
@@ -75,7 +75,7 @@ const fetchData = async () => {
         fieldType: 'number',
         required: false,
         description: '年龄字段',
-        createTime: '2024-03-20 10:00:00',
+        createTime: '2025-03-20 10:00:00',
       },
     ];
     pagination.value.total = 2;
