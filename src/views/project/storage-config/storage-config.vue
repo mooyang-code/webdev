@@ -1,146 +1,88 @@
 <template>
-  <div class="storage-config-container">
-    <a-card class="general-card" title="存储配置">
-      <template #extra>
-        <a-button type="primary">
-          <template #icon><icon-plus /></template>
-          新增配置
-        </a-button>
-      </template>
-      <a-table :data="tableData" :loading="loading" :pagination="pagination" @page-change="onPageChange">
-        <template #columns>
-          <a-table-column title="配置名称" data-index="configName" />
-          <a-table-column title="存储类型" data-index="storageType">
-            <template #cell="{ record }">
-              <a-tag :color="getStorageTypeColor(record.storageType)">
-                {{ record.storageType }}
-              </a-tag>
-            </template>
-          </a-table-column>
-          <a-table-column title="状态" data-index="status">
-            <template #cell="{ record }">
-              <a-tag :color="record.status ? 'green' : 'red'">
-                {{ record.status ? '启用' : '禁用' }}
-              </a-tag>
-            </template>
-          </a-table-column>
-          <a-table-column title="描述" data-index="description" />
-          <a-table-column title="更新时间" data-index="updateTime" />
-          <a-table-column title="操作" align="center">
-            <template #cell="{ record }">
-              <a-space>
-                <a-button type="text" size="small" @click="handleEdit(record)">
-                  <template #icon><icon-edit /></template>
-                  编辑
-                </a-button>
-                <a-button type="text" size="small" @click="handleToggleStatus(record)">
-                  <template #icon><icon-swap /></template>
-                  {{ record.status ? '禁用' : '启用' }}
-                </a-button>
-                <a-button type="text" status="danger" size="small" @click="handleDelete(record)">
-                  <template #icon><icon-delete /></template>
-                  删除
-                </a-button>
-              </a-space>
-            </template>
-          </a-table-column>
-        </template>
-      </a-table>
-    </a-card>
+  <div class="moox-page">
+    <div class="container">
+      <!-- 总体说明 -->
+      <a-card :bordered="false" class="overview-card">
+        <a-descriptions title="存储配置总览" :data="overviewData" :column="3" :align="{ label: 'right' }" />
+        <a-alert type="info" style="margin-top: 16px;" :show-icon="false">
+          <div>存储配置管理系统用于管理数据存储的各种配置，包括存储实体、存储设备以及数据路由配置。</div>
+          <div>通过合理配置可以实现数据的高效存储和快速访问。</div>
+        </a-alert>
+      </a-card>
+
+      <!-- Tab切换区域 -->
+      <a-card class="margin-top" :bordered="false">
+        <a-tabs :type="type" :size="size" v-model:active-key="activeTab">
+          <a-tab-pane key="storage-entity" title="存储实体配置">
+            <StorageEntityConfig />
+          </a-tab-pane>
+          <a-tab-pane key="storage-device" title="存储设备配置">
+            <StorageDeviceConfig />
+          </a-tab-pane>
+          <a-tab-pane key="object-route" title="数据对象-路由配置">
+            <ObjectRouteConfig />
+          </a-tab-pane>
+          <a-tab-pane key="field-route" title="数据字段-路由配置">
+            <FieldRouteConfig />
+          </a-tab-pane>
+        </a-tabs>
+      </a-card>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
-import { Message } from '@arco-design/web-vue';
-import { IconPlus, IconEdit, IconDelete, IconSwap } from '@arco-design/web-vue/es/icon';
+import StorageEntityConfig from './components/storage-entity-config.vue';
+import StorageDeviceConfig from './components/storage-device-config.vue';
+import ObjectRouteConfig from './components/object-route-config.vue';
+import FieldRouteConfig from './components/field-route-config.vue';
 
-// 表格数据
-const tableData = ref([]);
-const loading = ref(false);
-const pagination = ref({
-  total: 0,
-  current: 1,
-  pageSize: 10,
-});
+// Tab配置
+const type = ref("rounded");
+const size = ref("medium");
+const activeTab = ref("storage-entity");
 
-// 获取存储类型对应的颜色
-const getStorageTypeColor = (type: string) => {
-  const colorMap: Record<string, string> = {
-    'local': 'blue',
-    's3': 'green',
-    'oss': 'orange',
-    'cos': 'purple',
-  };
-  return colorMap[type] || 'gray';
-};
-
-// 获取表格数据
-const fetchData = async () => {
-  loading.value = true;
-  try {
-    // TODO: 调用接口获取数据
-    // 模拟数据
-    tableData.value = [
-      {
-        id: 1,
-        configName: '本地存储',
-        storageType: 'local',
-        status: true,
-        description: '本地文件系统存储',
-        updateTime: '2025-03-20 10:00:00',
-      },
-      {
-        id: 2,
-        configName: 'S3存储',
-        storageType: 's3',
-        status: false,
-        description: 'Amazon S3存储',
-        updateTime: '2025-03-20 10:00:00',
-      },
-    ];
-    pagination.value.total = 2;
-  } catch (error) {
-    Message.error('获取数据失败');
-  } finally {
-    loading.value = false;
+// 总览数据
+const overviewData = ref([
+  {
+    label: "存储实体数量：",
+    value: "2"
+  },
+  {
+    label: "存储设备数量：",
+    value: "3"
+  },
+  {
+    label: "对象路由配置：",
+    value: "5"
+  },
+  {
+    label: "字段路由配置：",
+    value: "8"
+  },
+  {
+    label: "存储服务状态：",
+    value: "正常运行"
+  },
+  {
+    label: "最后更新时间：",
+    value: "2025-03-20 15:30:00"
   }
-};
-
-// 页码改变
-const onPageChange = (current: number) => {
-  pagination.value.current = current;
-  fetchData();
-};
-
-// 编辑配置
-const handleEdit = (record: any) => {
-  console.log('编辑配置', record);
-  // TODO: 实现编辑功能
-};
-
-// 切换状态
-const handleToggleStatus = (record: any) => {
-  console.log('切换状态', record);
-  // TODO: 实现状态切换功能
-};
-
-// 删除配置
-const handleDelete = (record: any) => {
-  console.log('删除配置', record);
-  // TODO: 实现删除功能
-};
+]);
 
 onMounted(() => {
-  fetchData();
+  // 初始化数据
 });
 </script>
 
-<style scoped>
-.storage-config-container {
-  padding: 20px;
+<style lang="scss" scoped>
+.margin-top {
+  margin-top: $padding;
 }
-.general-card {
-  min-height: calc(100vh - 120px);
+
+.overview-card {
+  background: var(--color-success-light-1);
+  border: 1px solid var(--color-success-light-3);
 }
 </style> 

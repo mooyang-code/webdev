@@ -56,6 +56,12 @@ export const staticRoutes = [
         name: "field-management",
         component: () => import("@/views/project/field-management/field-management.vue"),
         meta: { title: "字段管理" }
+      },
+      {
+        path: "/project/:projectId/storage-config",
+        name: "storage-config",
+        component: () => import("@/views/project/storage-config/storage-config.vue"),
+        meta: { title: "存储配置" }
       }
     ]
   }
