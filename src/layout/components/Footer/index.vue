@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer class="footer">
-    <div class="footer_title" @click="onFooter">2025 © MooX by Moo</div>
+    <div class="footer_title" @click="onFooter">Copyright © 2025 Moo. All rights reserved.</div>
   </a-layout-footer>
 </template>
 

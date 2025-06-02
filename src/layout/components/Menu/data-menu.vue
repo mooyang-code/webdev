@@ -1,29 +1,23 @@
 <template>
-  <template v-for="project in projects" :key="'submenu-' + project.id">
+  <template v-for="project in projects" :key="'data-submenu-' + project.id">
     <a-sub-menu>
       <template #icon>
         <MenuItemIcon icon="icon-menu" />
       </template>
       <template #title>{{ project.name_cn || project.name }}</template>
       
-      <!-- 固定的子菜单项 -->
-      <a-menu-item :key="getDatasetKey(project)">
+      <!-- 数据管理的子菜单项 -->
+      <a-menu-item :key="getObjectListKey(project)">
         <template #icon>
           <div class="menu-dot"></div>
         </template>
-        <span>{{ $t('menu.dataset') }}</span>
+        <span>{{ $t('menu.object-list') }}</span>
       </a-menu-item>
-      <a-menu-item :key="getFieldManagementKey(project)">
+      <a-menu-item :key="getDataListKey(project)">
         <template #icon>
           <div class="menu-dot"></div>
         </template>
-        <span>{{ $t('menu.field-management') }}</span>
-      </a-menu-item>
-      <a-menu-item :key="getStorageConfigKey(project)">
-        <template #icon>
-          <div class="menu-dot"></div>
-        </template>
-        <span>{{ $t('menu.storage-config') }}</span>
+        <span>{{ $t('menu.data-list') }}</span>
       </a-menu-item>
     </a-sub-menu>
   </template>
@@ -46,34 +40,28 @@ const currentProjectId = computed(() => {
 });
 
 // 简化的key生成逻辑：当前项目返回路由name，其他项目返回唯一标识符
-const getDatasetKey = (project: Project) => {
+const getObjectListKey = (project: Project) => {
   const isCurrentProject = project.id.toString() === currentProjectId.value;
+  console.log(`对象列表key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
+  
   // 对于当前项目，始终返回路由name以确保正确选中
   if (isCurrentProject) {
-    return 'dataset';
+    return 'data-object-list';
   }
   // 对于其他项目，返回唯一标识符
-  return `dataset-${project.id}`;
+  return `data-object-list-${project.id}`;
 };
 
-const getFieldManagementKey = (project: Project) => {
+const getDataListKey = (project: Project) => {
   const isCurrentProject = project.id.toString() === currentProjectId.value;
+  console.log(`数据列表key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
+  
   // 对于当前项目，始终返回路由name以确保正确选中
   if (isCurrentProject) {
-    return 'field-management';
+    return 'data-data-list';
   }
   // 对于其他项目，返回唯一标识符
-  return `field-management-${project.id}`;
-};
-
-const getStorageConfigKey = (project: Project) => {
-  const isCurrentProject = project.id.toString() === currentProjectId.value;
-  // 对于当前项目，始终返回路由name以确保正确选中
-  if (isCurrentProject) {
-    return 'storage-config';
-  }
-  // 对于其他项目，返回唯一标识符
-  return `storage-config-${project.id}`;
+  return `data-data-list-${project.id}`;
 };
 
 // 获取项目列表
@@ -92,27 +80,33 @@ const fetchProjects = async () => {
   try {
     fetchPromise = listProjects();
     projects.value = await fetchPromise;
-    console.log('项目列表数据:', projects.value);
+    console.log('数据管理项目列表:', projects.value);
   } catch (error) {
-    console.error('获取项目列表失败:', error);
+    console.error('获取数据管理项目列表失败:', error);
   } finally {
     loading.value = false;
     fetchPromise = null;
   }
+
+  return projects.value;
 };
+
+// 暴露给父组件调用
+defineExpose({
+  fetchProjects
+});
 
 onMounted(() => {
   fetchProjects();
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .menu-dot {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background-color: currentColor;
-  opacity: 0.6;
+  background-color: var(--color-text-3);
   margin: 0 auto;
 }
 </style> 

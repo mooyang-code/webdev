@@ -6,7 +6,8 @@ import systemModule from "./system/index";
 import fileModule from "./file/index";
 import tableModule from "./table/index";
 import monitorModule from "./monitor/index";
+import dataModule from "./data/index";
 
 export function setupProdMockServer() {
-  createProdMockServer([...testModule, ...userModule, ...systemModule, ...fileModule, ...tableModule, ...monitorModule]);
+  createProdMockServer([...testModule, ...userModule, ...systemModule, ...fileModule, ...tableModule, ...monitorModule, ...dataModule]);
 }

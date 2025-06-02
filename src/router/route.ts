@@ -62,6 +62,18 @@ export const staticRoutes = [
         name: "storage-config",
         component: () => import("@/views/project/storage-config/storage-config.vue"),
         meta: { title: "存储配置" }
+      },
+      {
+        path: "/data-management/:projectId/object-list",
+        name: "data-object-list",
+        component: () => import("@/views/data/object-list/object-list.vue"),
+        meta: { title: "对象列表" }
+      },
+      {
+        path: "/data-management/:projectId/data-list",
+        name: "data-data-list",
+        component: () => import("@/views/data/data-list/data-list.vue"),
+        meta: { title: "数据列表" }
       }
     ]
   }

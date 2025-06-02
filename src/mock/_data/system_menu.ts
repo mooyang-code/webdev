@@ -195,15 +195,14 @@ export const systemMenu = [
     ]
   },
   
-  
   {
     id: "03",
     parentId: "0",
-    path: "/table",
-    name: "table",
-    redirect: "/table/common-table",
+    path: "/data-management",
+    name: "data-management",
+    redirect: "/data-management/overview",
     meta: {
-      title: "table",
+      title: "data-management",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -211,7 +210,7 @@ export const systemMenu = [
       link: "",
       iframe: false,
       roles: ["admin"],
-      svgIcon: "table",
+      svgIcon: "functions",
       sort: 3,
       type: 1
     },
@@ -220,11 +219,11 @@ export const systemMenu = [
   {
     id: "0301",
     parentId: "03",
-    path: "/table/common-table",
-    name: "common-table",
-    component: "table/common-table/common-table",
+    path: "/data-management/overview",
+    name: "data-overview",
+    component: "data/overview/overview",
     meta: {
-      title: "common-table",
+      title: "data-overview",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -241,11 +240,11 @@ export const systemMenu = [
   {
     id: "0302",
     parentId: "03",
-    path: "/table/custom-table",
-    name: "custom-table",
-    component: "table/custom-table/custom-table",
+    path: "/data-management/sync",
+    name: "data-sync",
+    component: "data/sync/sync",
     meta: {
-      title: "custom-table",
+      title: "data-sync",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -259,6 +258,71 @@ export const systemMenu = [
     },
     children: null
   },
+  {
+    id: "0303",
+    parentId: "03",
+    path: "/data-management/:projectId",
+    name: "data-project-detail",
+    redirect: "/data-management/:projectId/object-list",
+    meta: {
+      title: "data-project-detail",
+      hide: false,
+      disable: false,
+      keepAlive: true,
+      affix: false,
+      link: "",
+      iframe: false,
+      roles: ["admin"],
+      icon: "icon-menu",
+      sort: 3,
+      type: 1
+    },
+    children: [
+      {
+        id: "030301",
+        parentId: "0303",
+        path: "/data-management/:projectId/object-list",
+        name: "data-object-list",
+        component: "data/object-list/object-list",
+        meta: {
+          title: "object-list",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 1,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "030302",
+        parentId: "0303",
+        path: "/data-management/:projectId/data-list",
+        name: "data-data-list",
+        component: "data/data-list/data-list",
+        meta: {
+          title: "data-list",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 2,
+          type: 2
+        },
+        children: null
+      }
+    ]
+  },
+  
   {
     id: "04",
     parentId: "0",
@@ -340,7 +404,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "functions",
-      sort: 9,
+      sort: 5,
       type: 1
     },
     children: null
@@ -382,7 +446,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "set",
-      sort: 10,
+      sort: 6,
       type: 1
     },
     children: null
@@ -529,7 +593,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 11,
+      sort: 7,
       type: 2
     },
     children: null
@@ -550,7 +614,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 12,
+      sort: 8,
       type: 2
     },
     children: null
@@ -573,7 +637,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "financial-statement",
-      sort: 15,
+      sort: 9,
       type: 1
     },
     children: null
@@ -658,7 +722,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin", "common"],
       svgIcon: "about",
-      sort: 18,
+      sort: 10,
       type: 2
     },
     children: null
@@ -679,7 +743,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 19,
+      sort: 11,
       type: 2
     },
     children: null
@@ -700,7 +764,7 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 20,
+      sort: 12,
       type: 2
     },
     children: null
@@ -863,11 +927,11 @@ export const systemMenuTmp = [
   {
     id: "03",
     parentId: "0",
-    path: "/table",
-    name: "table",
-    redirect: "/table/common-table",
+    path: "/data-management",
+    name: "data-management",
+    redirect: "/data-management/overview",
     meta: {
-      title: "table",
+      title: "data-management",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -875,7 +939,7 @@ export const systemMenuTmp = [
       link: "",
       iframe: false,
       roles: ["admin"],
-      svgIcon: "table",
+      svgIcon: "functions",
       sort: 3,
       type: 1
     },
@@ -884,11 +948,11 @@ export const systemMenuTmp = [
   {
     id: "0301",
     parentId: "03",
-    path: "/table/common-table",
-    name: "common-table",
-    component: "table/common-table/common-table",
+    path: "/data-management/overview",
+    name: "data-overview",
+    component: "data/overview/overview",
     meta: {
-      title: "common-table",
+      title: "data-overview",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -905,11 +969,11 @@ export const systemMenuTmp = [
   {
     id: "0302",
     parentId: "03",
-    path: "/table/custom-table",
-    name: "custom-table",
-    component: "table/custom-table/custom-table",
+    path: "/data-management/sync",
+    name: "data-sync",
+    component: "data/sync/sync",
     meta: {
-      title: "custom-table",
+      title: "data-sync",
       hide: false,
       disable: false,
       keepAlive: true,
@@ -922,6 +986,70 @@ export const systemMenuTmp = [
       type: 2
     },
     children: null
+  },
+  {
+    id: "0303",
+    parentId: "03",
+    path: "/data-management/:projectId",
+    name: "data-project-detail",
+    redirect: "/data-management/:projectId/object-list",
+    meta: {
+      title: "data-project-detail",
+      hide: false,
+      disable: false,
+      keepAlive: true,
+      affix: false,
+      link: "",
+      iframe: false,
+      roles: ["admin"],
+      icon: "icon-menu",
+      sort: 3,
+      type: 1
+    },
+    children: [
+      {
+        id: "030301",
+        parentId: "0303",
+        path: "/data-management/:projectId/object-list",
+        name: "data-object-list",
+        component: "data/object-list/object-list",
+        meta: {
+          title: "object-list",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 1,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "030302",
+        parentId: "0303",
+        path: "/data-management/:projectId/data-list",
+        name: "data-data-list",
+        component: "data/data-list/data-list",
+        meta: {
+          title: "data-list",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 2,
+          type: 2
+        },
+        children: null
+      }
+    ]
   },
   {
     id: "04",
@@ -1526,7 +1654,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "functions",
-      sort: 9,
+      sort: 5,
       type: 1
     },
     children: null
@@ -1568,7 +1696,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "set",
-      sort: 10,
+      sort: 6,
       type: 1
     },
     children: null
@@ -1715,7 +1843,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 11,
+      sort: 7,
       type: 2
     },
     children: null
@@ -1736,7 +1864,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 12,
+      sort: 8,
       type: 2
     },
     children: null
@@ -2072,7 +2200,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "financial-statement",
-      sort: 15,
+      sort: 9,
       type: 1
     },
     children: null
@@ -2198,7 +2326,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin", "common"],
       svgIcon: "about",
-      sort: 18,
+      sort: 10,
       type: 2
     },
     children: null
@@ -2219,7 +2347,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 19,
+      sort: 11,
       type: 2
     },
     children: null
@@ -2240,7 +2368,7 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       svgIcon: "switch",
-      sort: 20,
+      sort: 12,
       type: 2
     },
     children: null

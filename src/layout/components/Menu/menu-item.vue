@@ -20,6 +20,34 @@
         <ProjectMenu />
       </a-sub-menu>
     </template>
+    <!-- 数据管理菜单特殊处理 -->
+    <template v-else-if="item.name === 'data-management'">
+      <a-sub-menu>
+        <template #icon v-if="item.meta.svgIcon || item.meta.icon">
+          <MenuItemIcon :svg-icon="item.meta.svgIcon" :icon="item.meta.icon" />
+        </template>
+        <template #title>{{ $t(`menu.${item.meta.title}`) }}</template>
+        
+        <!-- 固定的数据概览菜单项 -->
+        <a-menu-item :key="'data-overview'">
+          <template #icon>
+            <MenuItemIcon icon="icon-menu" />
+          </template>
+          <span>{{ $t('menu.data-overview') }}</span>
+        </a-menu-item>
+        
+        <!-- 固定的数据同步菜单项 -->
+        <a-menu-item :key="'data-sync'">
+          <template #icon>
+            <MenuItemIcon icon="icon-menu" />
+          </template>
+          <span>{{ $t('menu.data-sync') }}</span>
+        </a-menu-item>
+        
+        <!-- 渲染动态数据管理菜单 -->
+        <DataMenu />
+      </a-sub-menu>
+    </template>
     <!-- 其他菜单项保持原有逻辑 -->
     <template v-else>
       <a-sub-menu v-if="menuShow(item)" :key="item.name">
@@ -43,6 +71,7 @@
 import MenuItem from "@/layout/components/Menu/menu-item.vue";
 import MenuItemIcon from "@/layout/components/Menu/menu-item-icon.vue";
 import ProjectMenu from "@/layout/components/Menu/project-menu.vue";
+import DataMenu from "@/layout/components/Menu/data-menu.vue";
 import { useMenuMethod } from "@/hooks/useMenuMethod";
 import { useRouter } from 'vue-router';
 
