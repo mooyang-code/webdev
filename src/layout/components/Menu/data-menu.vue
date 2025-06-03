@@ -1,26 +1,29 @@
 <template>
-  <template v-for="project in projects" :key="'data-submenu-' + project.id">
-    <a-sub-menu>
-      <template #icon>
-        <MenuItemIcon icon="icon-menu" />
-      </template>
-      <template #title>{{ project.name_cn || project.name }}</template>
-      
-      <!-- 数据管理的子菜单项 -->
-      <a-menu-item :key="getObjectListKey(project)">
-        <template #icon>
-          <div class="menu-dot"></div>
-        </template>
-        <span>{{ $t('menu.object-list') }}</span>
-      </a-menu-item>
-      <a-menu-item :key="getDataListKey(project)">
-        <template #icon>
-          <div class="menu-dot"></div>
-        </template>
-        <span>{{ $t('menu.data-list') }}</span>
-      </a-menu-item>
-    </a-sub-menu>
-  </template>
+  <!-- 固定的数据管理子菜单，始终显示 -->
+  <a-menu-item key="data-overview">
+    <template #icon>
+      <MenuItemIcon icon="icon-menu" />
+    </template>
+    <span>{{ $t('menu.data-overview') }}</span>
+  </a-menu-item>
+  <a-menu-item key="data-sync">
+    <template #icon>
+      <MenuItemIcon icon="icon-menu" />
+    </template>
+    <span>{{ $t('menu.data-sync') }}</span>
+  </a-menu-item>
+  <a-menu-item key="data-object-list">
+    <template #icon>
+      <MenuItemIcon icon="icon-menu" />
+    </template>
+    <span>{{ $t('menu.object-list') }}</span>
+  </a-menu-item>
+  <a-menu-item key="data-data-list">
+    <template #icon>
+      <MenuItemIcon icon="icon-menu" />
+    </template>
+    <span>{{ $t('menu.data-list') }}</span>
+  </a-menu-item>
 </template>
 
 <script setup lang="ts">
@@ -39,30 +42,11 @@ const currentProjectId = computed(() => {
   return route.params.projectId as string;
 });
 
-// 简化的key生成逻辑：当前项目返回路由name，其他项目返回唯一标识符
-const getObjectListKey = (project: Project) => {
-  const isCurrentProject = project.id.toString() === currentProjectId.value;
-  console.log(`对象列表key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
-  
-  // 对于当前项目，始终返回路由name以确保正确选中
-  if (isCurrentProject) {
-    return 'data-object-list';
-  }
-  // 对于其他项目，返回唯一标识符
-  return `data-object-list-${project.id}`;
-};
-
-const getDataListKey = (project: Project) => {
-  const isCurrentProject = project.id.toString() === currentProjectId.value;
-  console.log(`数据列表key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
-  
-  // 对于当前项目，始终返回路由name以确保正确选中
-  if (isCurrentProject) {
-    return 'data-data-list';
-  }
-  // 对于其他项目，返回唯一标识符
-  return `data-data-list-${project.id}`;
-};
+// 获取当前项目
+const currentProject = computed(() => {
+  if (!currentProjectId.value || !projects.value.length) return null;
+  return projects.value.find(project => project.id.toString() === currentProjectId.value);
+});
 
 // 获取项目列表
 const fetchProjects = async () => {
@@ -80,7 +64,8 @@ const fetchProjects = async () => {
   try {
     fetchPromise = listProjects();
     projects.value = await fetchPromise;
-    console.log('数据管理项目列表:', projects.value);
+    console.log('数据管理菜单 - 项目列表数据:', projects.value);
+    console.log('数据管理菜单 - 当前项目:', currentProject.value);
   } catch (error) {
     console.error('获取数据管理项目列表失败:', error);
   } finally {
@@ -93,7 +78,9 @@ const fetchProjects = async () => {
 
 // 暴露给父组件调用
 defineExpose({
-  fetchProjects
+  fetchProjects,
+  currentProject,
+  projects
 });
 
 onMounted(() => {

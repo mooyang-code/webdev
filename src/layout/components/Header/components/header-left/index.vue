@@ -94,9 +94,18 @@ const onProjectChange = (projectId: string | number) => {
   if (currentRouteName === 'dataset' || currentRouteName === 'field-management' || currentRouteName === 'storage-config') {
     // 如果当前在项目管理页面，跳转到新项目的相同页面
     targetPath = `/project/${projectId}/${currentRouteName}`;
-  } else if (currentRouteName === 'data-object-list' || currentRouteName === 'data-data-list') {
+  } else if (currentRouteName === 'data-overview' || currentRouteName === 'data-sync' || currentRouteName === 'data-object-list' || currentRouteName === 'data-data-list') {
     // 如果当前在数据管理页面，跳转到新项目的相同页面
-    const pageType = currentRouteName === 'data-object-list' ? 'object-list' : 'data-list';
+    let pageType = '';
+    if (currentRouteName === 'data-overview') {
+      pageType = 'overview';
+    } else if (currentRouteName === 'data-sync') {
+      pageType = 'sync';
+    } else if (currentRouteName === 'data-object-list') {
+      pageType = 'object-list';
+    } else {
+      pageType = 'data-list';
+    }
     targetPath = `/data-management/${projectId}/${pageType}`;
   } else {
     // 其他情况默认跳转到数据集页面

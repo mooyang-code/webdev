@@ -33,7 +33,7 @@ export const currentlyRoute = (current: any) => {
   }
 
   // 定义静态路由名称列表（项目管理和数据管理的三级菜单）
-  const staticRouteNames = ['dataset', 'field-management', 'storage-config', 'data-object-list', 'data-data-list'];
+  const staticRouteNames = ['dataset', 'field-management', 'storage-config', 'data-overview', 'data-sync', 'data-object-list', 'data-data-list'];
   
   // 跳转路由是有权限的，从有权限路由中匹配
   const { hasRoute } = useRoutingMethod();
