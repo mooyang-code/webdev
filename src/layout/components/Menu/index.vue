@@ -79,18 +79,11 @@ const onMenuItem = (key: string) => {
         ? `/data-management/${currentProjectId}/object-list`
         : `/data-management/${currentProjectId}/data-list`;
       
+      console.log('跳转数据管理页面:', targetPath);
       router.push(targetPath);
       
-      // 手动更新currentRoute以确保菜单选中状态正确
-      const routeStore = useRoutesConfigStore();
-      routeStore.setCurrentRoute({
-        name: key,
-        path: targetPath,
-        params: { projectId: currentProjectId },
-        query: router.currentRoute.value.query,
-        meta: {}
-      });
-      console.log('手动更新数据管理currentRoute:', key);
+      // 移除手动更新currentRoute，让路由守卫自动处理
+      console.log('数据管理路由跳转，让路由守卫自动更新状态');
       return;
     } else {
       // 如果没有当前项目ID，跳转到数据概览页面
@@ -101,25 +94,21 @@ const onMenuItem = (key: string) => {
   
   // 处理当前项目的项目管理菜单项（直接使用路由name）
   if (key === 'dataset' || key === 'field-management' || key === 'storage-config') {
+    console.log('处理当前项目的项目管理菜单项:', key);
     // 从当前路由获取项目ID
     const currentProjectId = router.currentRoute.value.params.projectId;
+    console.log('当前项目ID:', currentProjectId);
     if (currentProjectId) {
       const targetPath = `/project/${currentProjectId}/${key}`;
+      console.log('目标路径:', targetPath);
       
       router.push(targetPath);
       
-      // 手动更新currentRoute以确保菜单选中状态正确
-      const routeStore = useRoutesConfigStore();
-      routeStore.setCurrentRoute({
-        name: key,
-        path: targetPath,
-        params: { projectId: currentProjectId },
-        query: router.currentRoute.value.query,
-        meta: {}
-      });
-      console.log('手动更新项目管理currentRoute:', key);
+      // 移除手动更新currentRoute，让路由守卫自动处理
+      console.log('项目管理路由跳转，让路由守卫自动更新状态');
       return;
     } else {
+      console.log('没有当前项目ID，跳转到创建项目页面');
       // 如果没有当前项目ID，跳转到创建项目页面
       router.push('/project/create-project');
       return;
@@ -143,11 +132,15 @@ const onMenuItem = (key: string) => {
   
   // 处理其他项目的项目管理菜单项（带项目ID的key）
   if (key.startsWith('dataset-') || key.startsWith('field-management-') || key.startsWith('storage-config-')) {
+    console.log('处理其他项目的项目管理菜单项:', key);
     const parts = key.split('-');
     const projectId = parts[parts.length - 1]; // 获取项目ID
     const menuType = parts.slice(0, -1).join('-'); // 获取菜单类型
+    console.log('解析项目ID:', projectId, '菜单类型:', menuType);
     
-    router.push(`/project/${projectId}/${menuType}`);
+    const targetPath = `/project/${projectId}/${menuType}`;
+    console.log('跳转到其他项目路径:', targetPath);
+    router.push(targetPath);
     // 跳转到其他项目后，currentRoute应该被正常更新
     return;
   }

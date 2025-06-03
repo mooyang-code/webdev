@@ -14,7 +14,7 @@ const themeStore = useThemeConfig();
 const { collapsed, asideDark, layoutType } = storeToRefs(themeStore);
 
 // 全局title
-const title = import.meta.env.VITE_GLOB_APP_TITLE;
+const title = import.meta.env.VITE_GLOB_APP_TITLE + " 量化平台";
 
 // 黑暗模式的文字渲染
 const isDark = computed(() => {

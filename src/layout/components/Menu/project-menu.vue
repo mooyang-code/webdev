@@ -48,6 +48,8 @@ const currentProjectId = computed(() => {
 // 简化的key生成逻辑：当前项目返回路由name，其他项目返回唯一标识符
 const getDatasetKey = (project: Project) => {
   const isCurrentProject = project.id.toString() === currentProjectId.value;
+  console.log(`数据集key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
+  
   // 对于当前项目，始终返回路由name以确保正确选中
   if (isCurrentProject) {
     return 'dataset';
@@ -58,6 +60,8 @@ const getDatasetKey = (project: Project) => {
 
 const getFieldManagementKey = (project: Project) => {
   const isCurrentProject = project.id.toString() === currentProjectId.value;
+  console.log(`字段管理key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
+  
   // 对于当前项目，始终返回路由name以确保正确选中
   if (isCurrentProject) {
     return 'field-management';
@@ -68,6 +72,8 @@ const getFieldManagementKey = (project: Project) => {
 
 const getStorageConfigKey = (project: Project) => {
   const isCurrentProject = project.id.toString() === currentProjectId.value;
+  console.log(`存储配置key计算: 项目${project.id}, 当前项目ID: ${currentProjectId.value}, 是否当前项目: ${isCurrentProject}`);
+  
   // 对于当前项目，始终返回路由name以确保正确选中
   if (isCurrentProject) {
     return 'storage-config';
@@ -99,7 +105,14 @@ const fetchProjects = async () => {
     loading.value = false;
     fetchPromise = null;
   }
+
+  return projects.value;
 };
+
+// 暴露给父组件调用
+defineExpose({
+  fetchProjects
+});
 
 onMounted(() => {
   fetchProjects();
@@ -108,11 +121,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .menu-dot {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background-color: currentColor;
-  opacity: 0.6;
+  background-color: var(--color-text-3);
   margin: 0 auto;
 }
 </style> 

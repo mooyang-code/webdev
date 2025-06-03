@@ -200,16 +200,6 @@
             </a-form>
           </a-col>
         </a-row>
-        <a-row v-if="currentStep == 4">
-          <a-col :span="16" :offset="4">
-            <a-typography style="padding: 24px; background: var(--color-fill-2)">
-              <a-typography-paragraph>提示</a-typography-paragraph>
-              <ul>
-                <li>创建项目成功，项目ID为 {{ createdProjectId }}，请刷新页面。</li>
-              </ul>
-            </a-typography>
-          </a-col>
-        </a-row>
       </div>
     </a-spin>
   </div>
@@ -221,18 +211,7 @@ import { api, AUTH_INFO } from '@/api/config';
 
 const loading = ref(false);
 const currentStep = ref(1);
-const projectIdStatus = ref<'normal' | 'error'>('normal');
-const projectIdError = ref('');
-const datasetIdStatus = ref<'normal' | 'error'>('normal');
-const datasetIdError = ref('');
 const createdProjectId = ref('');
-
-// 获取当前页面的IP地址
-const getCurrentHost = () => {
-  const url = window.location.href;
-  const urlObj = new URL(url);
-  return urlObj.hostname;
-};
 
 interface CreateProjectResponseData {
   code: number;
