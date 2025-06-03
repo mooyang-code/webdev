@@ -46,6 +46,12 @@ export const staticRoutes = [
     // 二级路由-主要渲染页面
     children: [
       {
+        path: "/home",
+        name: "home",
+        component: () => import("@/views/home/home.vue"),
+        meta: { title: "首页" }
+      },
+      {
         path: "/project/:projectId/dataset",
         name: "dataset",
         component: () => import("@/views/project/dataset/dataset.vue"),
@@ -74,6 +80,18 @@ export const staticRoutes = [
         name: "data-data-list",
         component: () => import("@/views/data/data-list/data-list.vue"),
         meta: { title: "数据列表" }
+      },
+      {
+        path: "/data-management/:projectId/overview",
+        name: "data-overview",
+        component: () => import("@/views/data/overview/overview.vue"),
+        meta: { title: "数据概览" }
+      },
+      {
+        path: "/data-management/:projectId/sync",
+        name: "data-sync",
+        component: () => import("@/views/data/sync/sync.vue"),
+        meta: { title: "数据同步" }
       }
     ]
   }

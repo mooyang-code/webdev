@@ -211,7 +211,7 @@ const fetchData = async () => {
       },
     ];
     pagination.value.total = 2;
-  } catch (error) {
+  } catch {
     Message.error('获取数据失败');
   } finally {
     loading.value = false;
@@ -274,6 +274,7 @@ const onUpdate = (record: FieldRoute) => {
 
 // 删除
 const onDelete = (record: FieldRoute) => {
+  void record; // 避免未使用参数警告
   // TODO: 实现删除功能
   Message.success('删除成功');
   fetchData();
@@ -299,7 +300,7 @@ const handleOk = async () => {
     Message.success('保存成功');
     modalVisible.value = false;
     fetchData();
-  } catch (error) {
+  } catch {
     // 表单验证失败
   }
 };

@@ -237,8 +237,17 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { ref, reactive, computed, onMounted, watch } from 'vue';
 import { listProjects, type Project } from '@/api/project';
 import { Message } from '@arco-design/web-vue';
+
+const route = useRoute();
+
+// 获取当前项目ID
+const currentProjectId = computed(() => {
+  return route.params.projectId as string;
+});
 
 interface SyncConfig {
   id: string;
@@ -267,7 +276,7 @@ const syncConfigList = reactive<SyncConfig[]>([
   {
     id: "sync-001",
     name: "用户数据同步",
-    projectId: "proj-001",
+    projectId: "101",
     projectName: "用户管理系统",
     sourceHost: "192.168.1.100:8080",
     targetHost: "192.168.1.101:8080",
@@ -282,7 +291,7 @@ const syncConfigList = reactive<SyncConfig[]>([
   {
     id: "sync-002",
     name: "订单数据同步",
-    projectId: "proj-002",
+    projectId: "102",
     projectName: "订单处理系统",
     sourceHost: "192.168.1.100:8080",
     targetHost: "192.168.1.102:8080",
@@ -297,7 +306,7 @@ const syncConfigList = reactive<SyncConfig[]>([
   {
     id: "sync-003",
     name: "分析数据同步",
-    projectId: "proj-003",
+    projectId: "101",
     projectName: "数据分析平台",
     sourceHost: "192.168.1.100:8080",
     targetHost: "192.168.1.103:8080",
@@ -338,14 +347,12 @@ const syncForm = reactive({
 
 const loading = ref(false);
 
-// 过滤后的同步配置列表
+// 根据当前项目ID过滤同步配置，再应用搜索条件
 const filteredSyncList = computed(() => {
-  let result = syncConfigList;
+  // 首先按当前项目ID过滤
+  let result = syncConfigList.filter(item => item.projectId === currentProjectId.value);
   
-  if (searchForm.projectId) {
-    result = result.filter(item => item.projectId === searchForm.projectId);
-  }
-  
+  // 再应用搜索条件
   if (searchForm.status !== '') {
     result = result.filter(item => item.status === Number(searchForm.status));
   }
@@ -356,6 +363,9 @@ const filteredSyncList = computed(() => {
       item.description?.toLowerCase().includes(searchForm.keyword.toLowerCase())
     );
   }
+  
+  console.log('数据同步 - 当前项目ID:', currentProjectId.value);
+  console.log('数据同步 - 过滤后的配置列表:', result);
   
   return result;
 });
@@ -431,22 +441,37 @@ const getStatusText = (status: number) => {
   return texts[status] || '未知';
 };
 
-// 获取项目列表
-const fetchProjects = async () => {
+// 加载项目数据
+const loadProjectData = async () => {
+  console.log('数据同步 - 加载项目数据，当前项目ID:', currentProjectId.value);
+  
   try {
     projectList.value = await listProjects();
+    
+    // 设置搜索表单的默认项目ID为当前项目
+    searchForm.projectId = currentProjectId.value;
+    
+    // TODO: 根据项目ID加载该项目的同步配置
+    // 这里可以调用API获取特定项目的同步配置
+    
   } catch (error) {
-    console.error('获取项目列表失败:', error);
-    Message.error('获取项目列表失败');
+    console.error('加载项目数据失败:', error);
   }
 };
+
+// 监听项目ID变化
+watch(currentProjectId, (newProjectId) => {
+  if (newProjectId) {
+    loadProjectData();
+  }
+}, { immediate: true });
 
 const handleSearch = () => {
   // 搜索逻辑已在计算属性中实现
 };
 
 const handleRefresh = () => {
-  fetchProjects();
+  loadProjectData();
   Message.success('刷新成功');
 };
 
@@ -568,7 +593,7 @@ const resetSyncForm = () => {
 };
 
 onMounted(() => {
-  fetchProjects();
+  loadProjectData();
 });
 </script>
 

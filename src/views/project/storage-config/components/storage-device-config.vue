@@ -179,7 +179,7 @@ const fetchData = async () => {
       },
     ];
     pagination.value.total = 2;
-  } catch (error) {
+  } catch {
     Message.error('获取数据失败');
   } finally {
     loading.value = false;
@@ -219,9 +219,9 @@ const onToggleStatus = (record: StorageDevice) => {
 };
 
 // 删除
-const onDelete = (record: StorageDevice) => {
+const onDelete = (_record: StorageDevice) => {
   // TODO: 实现删除功能
-  Message.info(`删除存储设备 ${record.device_name}`);
+  Message.info(`删除存储设备 ${_record.device_name}`);
 };
 
 // 确认保存
@@ -232,7 +232,7 @@ const handleOk = async () => {
     Message.success('保存成功');
     modalVisible.value = false;
     fetchData();
-  } catch (error) {
+  } catch {
     // 表单验证失败
   }
 };

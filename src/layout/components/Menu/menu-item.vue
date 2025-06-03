@@ -44,8 +44,21 @@
           <span>{{ $t('menu.data-sync') }}</span>
         </a-menu-item>
         
-        <!-- 渲染动态数据管理菜单 -->
-        <DataMenu />
+        <!-- 固定的对象列表菜单项 -->
+        <a-menu-item :key="'data-object-list'">
+          <template #icon>
+            <MenuItemIcon icon="icon-menu" />
+          </template>
+          <span>{{ $t('menu.object-list') }}</span>
+        </a-menu-item>
+        
+        <!-- 固定的数据列表菜单项 -->
+        <a-menu-item :key="'data-data-list'">
+          <template #icon>
+            <MenuItemIcon icon="icon-menu" />
+          </template>
+          <span>{{ $t('menu.data-list') }}</span>
+        </a-menu-item>
       </a-sub-menu>
     </template>
     <!-- 其他菜单项保持原有逻辑 -->
@@ -71,7 +84,6 @@
 import MenuItem from "@/layout/components/Menu/menu-item.vue";
 import MenuItemIcon from "@/layout/components/Menu/menu-item-icon.vue";
 import ProjectMenu from "@/layout/components/Menu/project-menu.vue";
-import DataMenu from "@/layout/components/Menu/data-menu.vue";
 import { useMenuMethod } from "@/hooks/useMenuMethod";
 import { useRouter } from 'vue-router';
 

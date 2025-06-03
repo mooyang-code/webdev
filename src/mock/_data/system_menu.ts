@@ -200,7 +200,7 @@ export const systemMenu = [
     parentId: "0",
     path: "/data-management",
     name: "data-management",
-    redirect: "/data-management/overview",
+    redirect: "/data-management/:projectId/overview",
     meta: {
       title: "data-management",
       hide: false,
@@ -219,51 +219,9 @@ export const systemMenu = [
   {
     id: "0301",
     parentId: "03",
-    path: "/data-management/overview",
-    name: "data-overview",
-    component: "data/overview/overview",
-    meta: {
-      title: "data-overview",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 1,
-      type: 2
-    },
-    children: null
-  },
-  {
-    id: "0302",
-    parentId: "03",
-    path: "/data-management/sync",
-    name: "data-sync",
-    component: "data/sync/sync",
-    meta: {
-      title: "data-sync",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 2,
-      type: 2
-    },
-    children: null
-  },
-  {
-    id: "0303",
-    parentId: "03",
     path: "/data-management/:projectId",
     name: "data-project-detail",
-    redirect: "/data-management/:projectId/object-list",
+    redirect: "/data-management/:projectId/overview",
     meta: {
       title: "data-project-detail",
       hide: false,
@@ -274,18 +232,18 @@ export const systemMenu = [
       iframe: false,
       roles: ["admin"],
       icon: "icon-menu",
-      sort: 3,
+      sort: 1,
       type: 1
     },
     children: [
       {
-        id: "030301",
-        parentId: "0303",
-        path: "/data-management/:projectId/object-list",
-        name: "data-object-list",
-        component: "data/object-list/object-list",
+        id: "030101",
+        parentId: "0301",
+        path: "/data-management/:projectId/overview",
+        name: "data-overview",
+        component: "data/overview/overview",
         meta: {
-          title: "object-list",
+          title: "data-overview",
           hide: false,
           disable: false,
           keepAlive: true,
@@ -300,8 +258,50 @@ export const systemMenu = [
         children: null
       },
       {
-        id: "030302",
-        parentId: "0303",
+        id: "030102",
+        parentId: "0301",
+        path: "/data-management/:projectId/sync",
+        name: "data-sync",
+        component: "data/sync/sync",
+        meta: {
+          title: "data-sync",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 2,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "030103",
+        parentId: "0301",
+        path: "/data-management/:projectId/object-list",
+        name: "data-object-list",
+        component: "data/object-list/object-list",
+        meta: {
+          title: "object-list",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 3,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "030104",
+        parentId: "0301",
         path: "/data-management/:projectId/data-list",
         name: "data-data-list",
         component: "data/data-list/data-list",
@@ -315,7 +315,7 @@ export const systemMenu = [
           iframe: false,
           roles: ["admin"],
           icon: "icon-menu",
-          sort: 2,
+          sort: 4,
           type: 2
         },
         children: null
@@ -929,7 +929,7 @@ export const systemMenuTmp = [
     parentId: "0",
     path: "/data-management",
     name: "data-management",
-    redirect: "/data-management/overview",
+    redirect: "/data-management/:projectId/overview",
     meta: {
       title: "data-management",
       hide: false,
@@ -948,51 +948,9 @@ export const systemMenuTmp = [
   {
     id: "0301",
     parentId: "03",
-    path: "/data-management/overview",
-    name: "data-overview",
-    component: "data/overview/overview",
-    meta: {
-      title: "data-overview",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 1,
-      type: 2
-    },
-    children: null
-  },
-  {
-    id: "0302",
-    parentId: "03",
-    path: "/data-management/sync",
-    name: "data-sync",
-    component: "data/sync/sync",
-    meta: {
-      title: "data-sync",
-      hide: false,
-      disable: false,
-      keepAlive: true,
-      affix: false,
-      link: "",
-      iframe: false,
-      roles: ["admin"],
-      icon: "icon-menu",
-      sort: 2,
-      type: 2
-    },
-    children: null
-  },
-  {
-    id: "0303",
-    parentId: "03",
     path: "/data-management/:projectId",
     name: "data-project-detail",
-    redirect: "/data-management/:projectId/object-list",
+    redirect: "/data-management/:projectId/overview",
     meta: {
       title: "data-project-detail",
       hide: false,
@@ -1003,18 +961,18 @@ export const systemMenuTmp = [
       iframe: false,
       roles: ["admin"],
       icon: "icon-menu",
-      sort: 3,
+      sort: 1,
       type: 1
     },
     children: [
       {
-        id: "030301",
-        parentId: "0303",
-        path: "/data-management/:projectId/object-list",
-        name: "data-object-list",
-        component: "data/object-list/object-list",
+        id: "030101",
+        parentId: "0301",
+        path: "/data-management/:projectId/overview",
+        name: "data-overview",
+        component: "data/overview/overview",
         meta: {
-          title: "object-list",
+          title: "data-overview",
           hide: false,
           disable: false,
           keepAlive: true,
@@ -1029,8 +987,50 @@ export const systemMenuTmp = [
         children: null
       },
       {
-        id: "030302",
-        parentId: "0303",
+        id: "030102",
+        parentId: "0301",
+        path: "/data-management/:projectId/sync",
+        name: "data-sync",
+        component: "data/sync/sync",
+        meta: {
+          title: "data-sync",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 2,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "030103",
+        parentId: "0301",
+        path: "/data-management/:projectId/object-list",
+        name: "data-object-list",
+        component: "data/object-list/object-list",
+        meta: {
+          title: "object-list",
+          hide: false,
+          disable: false,
+          keepAlive: true,
+          affix: false,
+          link: "",
+          iframe: false,
+          roles: ["admin"],
+          icon: "icon-menu",
+          sort: 3,
+          type: 2
+        },
+        children: null
+      },
+      {
+        id: "030104",
+        parentId: "0301",
         path: "/data-management/:projectId/data-list",
         name: "data-data-list",
         component: "data/data-list/data-list",
@@ -1044,7 +1044,7 @@ export const systemMenuTmp = [
           iframe: false,
           roles: ["admin"],
           icon: "icon-menu",
-          sort: 2,
+          sort: 4,
           type: 2
         },
         children: null

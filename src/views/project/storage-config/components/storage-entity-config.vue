@@ -121,7 +121,7 @@ const fetchData = async () => {
       },
     ];
     pagination.value.total = 1;
-  } catch (error) {
+  } catch {
     Message.error('获取数据失败');
   } finally {
     loading.value = false;
@@ -159,9 +159,9 @@ const onToggleStatus = (record: StorageEntity) => {
 };
 
 // 删除
-const onDelete = (record: StorageEntity) => {
+const onDelete = (_record: StorageEntity) => {
   // TODO: 实现删除功能
-  Message.info(`删除存储实体 ${record.entity_id}`);
+  Message.info(`删除存储实体 ${_record.entity_id}`);
 };
 
 // 确认保存
@@ -172,7 +172,7 @@ const handleOk = async () => {
     Message.success('保存成功');
     modalVisible.value = false;
     fetchData();
-  } catch (error) {
+  } catch {
     // 表单验证失败
   }
 };

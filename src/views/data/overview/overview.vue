@@ -95,7 +95,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { ref, reactive, onMounted, computed, watch } from 'vue';
 
 interface ProjectInfo {
   id: string;
@@ -122,6 +123,12 @@ interface Activity {
 }
 
 const router = useRouter();
+const route = useRoute();
+
+// 获取当前项目ID
+const currentProjectId = computed(() => {
+  return route.params.projectId as string;
+});
 
 // 数据统计
 const projectStats = reactive<ProjectStats>({
@@ -191,6 +198,63 @@ const recentActivities = reactive<Activity[]>([
 
 const loading = ref<boolean>(false);
 
+// 根据项目ID加载数据
+const loadProjectData = async (projectId: string) => {
+  if (!projectId) return;
+  
+  loading.value = true;
+  console.log('数据概览 - 加载项目数据:', projectId);
+  
+  try {
+    // TODO: 根据项目ID调用API获取项目相关数据
+    // 这里先模拟根据项目ID显示不同的数据
+    if (projectId === '101') {
+      projectStats.totalObjects = 15;
+      projectStats.totalData = 35000;
+      // 更新活动记录
+      recentActivities.splice(0, recentActivities.length, 
+        {
+          id: "1",
+          content: `项目 ${projectId} 新增了数据表`,
+          time: "1小时前"
+        },
+        {
+          id: "2",
+          content: `项目 ${projectId} 完成数据同步`,
+          time: "3小时前"
+        }
+      );
+    } else {
+      projectStats.totalObjects = 25;
+      projectStats.totalData = 58000;
+      // 更新活动记录
+      recentActivities.splice(0, recentActivities.length,
+        {
+          id: "1",
+          content: `项目 ${projectId} 更新了配置`,
+          time: "30分钟前"
+        },
+        {
+          id: "2",
+          content: `项目 ${projectId} 导入了新数据`,
+          time: "2小时前"
+        }
+      );
+    }
+  } catch (error) {
+    console.error('加载项目数据失败:', error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+// 监听项目ID变化
+watch(currentProjectId, (newProjectId) => {
+  if (newProjectId) {
+    loadProjectData(newProjectId);
+  }
+}, { immediate: true });
+
 const columns = [
   {
     title: "项目名称",
@@ -253,6 +317,10 @@ const handleViewProject = (project: ProjectInfo) => {
 const handleManageProject = (project: ProjectInfo) => {
   router.push(`/project/${project.id}/dataset`);
 };
+
+onMounted(() => {
+  console.log('数据概览页面挂载，当前项目ID:', currentProjectId.value);
+});
 </script>
 
 <style lang="scss" scoped>
