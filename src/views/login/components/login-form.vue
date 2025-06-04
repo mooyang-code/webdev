@@ -33,7 +33,7 @@
         </a-form-item>
       </a-form>
     </div>
-    <div class="register">注册账号</div>
+    <div class="register">Powered by Moo</div>
   </div>
 </template>
 

@@ -11,7 +11,7 @@
 </template>
 <script setup lang="ts">
 // 全局title
-const title = import.meta.env.VITE_GLOB_APP_TITLE;
+const title = import.meta.env.VITE_GLOB_APP_TITLE + " 一站式量化平台";
 </script>
 
 <style lang="scss" scoped>

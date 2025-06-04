@@ -25,62 +25,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from 'vue';
+import { onMounted, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import ButtonCollapsed from "@/layout/components/Header/components/button-collapsed/index.vue";
-import { listProjects, type Project } from '@/api/project';
+import { useProjectStore } from '@/store/modules/project';
+import { storeToRefs } from 'pinia';
+import type { Project } from '@/api/project';
 
 const router = useRouter();
 const route = useRoute();
 
-// 项目相关状态
-const projects = ref<Project[]>([]);
-const selectedProjectId = ref<string | number>();
-const loading = ref(false);
+// 使用项目状态管理
+const projectStore = useProjectStore();
+const { projects, selectedProjectId, loading } = storeToRefs(projectStore);
 
 // 计算项目选项
 const projectOptions = computed(() => {
-  return projects.value.map(project => ({
+  return projects.value.map((project: Project) => ({
     label: project.name_cn || project.name,
     value: project.id,
     disabled: false
   }));
 });
 
-// 获取项目列表
-const fetchProjects = async () => {
-  loading.value = true;
-  try {
-    projects.value = await listProjects();
-    console.log('获取项目列表成功:', projects.value);
-    
-    if (projects.value.length > 0) {
-      // 如果当前路由包含项目ID，则设置为选中状态
-      if (route.params.projectId) {
-        selectedProjectId.value = Number(route.params.projectId);
-      } else if (!selectedProjectId.value) {
-        // 只有当下拉框还没有选中任何项目时，才默认选中第一个项目并跳转
-        // 这通常发生在首次加载页面时
-        const firstProject = projects.value[0];
-        selectedProjectId.value = firstProject.id;
-        console.log('首次加载，默认选中第一个项目:', firstProject);
-        // 自动跳转到第一个项目的数据集页面
-        router.push(`/project/${firstProject.id}/dataset`);
-      }
-      // 如果selectedProjectId.value已经有值，说明用户之前已经选择过项目，
-      // 现在只是导航到了一个不包含项目ID的页面（如数据概览），
-      // 这时应该保持下拉框的选中状态，不要跳转
-    }
-  } catch (error) {
-    console.error('获取项目列表失败:', error);
-  } finally {
-    loading.value = false;
-  }
-};
-
 // 项目切换事件
 const onProjectChange = (projectId: string | number) => {
   console.log('切换项目:', projectId);
+  
+  // 更新全局状态
+  projectStore.setSelectedProjectId(Number(projectId));
   
   // 获取当前路由信息，判断应该跳转到新项目的哪个页面
   const currentRouteName = route.name;
@@ -107,6 +80,9 @@ const onProjectChange = (projectId: string | number) => {
       pageType = 'data-list';
     }
     targetPath = `/data-management/${projectId}/${pageType}`;
+  } else if (currentRouteName === 'home') {
+    // 如果当前在首页，保持在首页但会通过全局状态更新显示内容
+    return;
   } else {
     // 其他情况默认跳转到数据集页面
     targetPath = `/project/${projectId}/dataset`;
@@ -124,13 +100,18 @@ const handleCreateProject = () => {
 // 监听路由变化，更新选中的项目
 watch(() => route.params.projectId, (newProjectId) => {
   if (newProjectId) {
-    selectedProjectId.value = Number(newProjectId);
+    projectStore.setSelectedProjectId(Number(newProjectId));
   }
-  // 移除了 else 分支，这样当路由没有项目ID时，下拉框会保持原来的选择
 });
 
-onMounted(() => {
-  fetchProjects();
+onMounted(async () => {
+  // 获取项目列表
+  await projectStore.fetchProjects();
+  
+  // 如果当前路由有项目ID，同步到全局状态
+  if (route.params.projectId) {
+    projectStore.setSelectedProjectId(Number(route.params.projectId));
+  }
 });
 </script>
 
