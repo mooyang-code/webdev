@@ -7,7 +7,7 @@
         </a-avatar>
         <div class="my-name">
           <div class="my-title">王马Verge</div>
-          <div class="my-local">素材投稿：2547096351@qq.com</div>
+          <div class="my-local">素材投稿：702080167@qq.com</div>
         </div>
       </div>
       <div class="btn-box">

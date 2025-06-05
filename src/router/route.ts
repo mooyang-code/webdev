@@ -52,6 +52,18 @@ export const staticRoutes = [
         meta: { title: "首页" }
       },
       {
+        path: "/personal/userinfo",
+        name: "userinfo",
+        component: () => import("@/views/personal/userinfo/userinfo.vue"),
+        meta: { title: "个人信息" }
+      },
+      {
+        path: "/personal/user-settings",
+        name: "user-settings",
+        component: () => import("@/views/personal/user-settings/user-settings.vue"),
+        meta: { title: "个人设置" }
+      },
+      {
         path: "/project/:projectId/dataset",
         name: "dataset",
         component: () => import("@/views/project/dataset/dataset.vue"),

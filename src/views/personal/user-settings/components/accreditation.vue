@@ -70,7 +70,7 @@ const data = ref([
   },
   {
     label: "邮箱：",
-    value: "2547096351@qq.com"
+    value: "702080167@qq.com"
   },
   {
     label: "手机号：",

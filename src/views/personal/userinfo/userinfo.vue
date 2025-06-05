@@ -7,7 +7,7 @@
         </a-avatar>
         <div class="my-name">
           <div class="my-title title-size-1">Moo</div>
-          <div class="my-local"><icon-location />浙江杭州</div>
+          <div class="my-local"><icon-location />广东深圳</div>
         </div>
       </div>
       <a-grid :cols="{ xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }" :col-gap="16" :row-gap="16">
@@ -35,7 +35,6 @@
             <div class="column-title-size-2">{{ item.label }}：</div>
             <div>{{ item.value }}</div>
           </div>
-          <a-image width="100" :src="officialAccount" />
         </a-grid-item>
         <a-grid-item>
           <a-image default-scale height="220" :src="otherImage" />
@@ -54,22 +53,21 @@
 <script setup lang="ts">
 import myImage from "@/assets/img/my-image.jpg";
 import otherImage from "@/assets/img/other-image.jpg";
-import officialAccount from "@/assets/img/official-account.png";
 
 const list = reactive({
   aboutMe: [
     { label: "🐦我用语雀", value: ["知识管理", "记录生活"], theme: "green" },
     { label: "💫个性性格", value: ["天秤座", "INFJ-T"], theme: "blue" },
-    { label: "💼职业工作", value: ["互联网", "前端开发"], theme: "orangered" },
-    { label: "🏠现居城市", value: ["杭州"], theme: "magenta" },
+    { label: "💼职业工作", value: ["互联网", "后端架构师"], theme: "orangered" },
+    { label: "🏠现居城市", value: ["深圳"], theme: "magenta" },
     { label: "💙兴趣爱好", value: ["读书", "音乐", "狗狗🐕"], theme: "purple" }
   ],
   callMe: [
-    { label: "📧邮箱", value: "2547096351@qq.com", link: false },
-    { label: "📠微信", value: "fanction-w", link: false }
+    { label: "📧邮箱", value: "702080167@qq.com", link: false },
+    { label: "📠微信", value: "Maxwell-2025", link: false }
   ],
   other: [
-    { label: "🧭公众号", value: "DCodes" },
+    { label: "🧭公众号", value: "" },
     { label: "🌟公众号二维码", value: "" }
   ],
   introduce: [

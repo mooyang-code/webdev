@@ -79,13 +79,6 @@
             <span class="margin-left-text">{{ $t(`system.change-password`) }}</span>
           </template>
         </a-doption>
-        <!-- 项目地址 -->
-        <a-doption @click="onProject">
-          <template #default>
-            <SvgIcon :name="'gitee'" :size="18" />
-            <span class="margin-left-text">{{ $t(`system.project-address`) }}</span>
-          </template>
-        </a-doption>
         <a-divider margin="0" />
         <!-- 退出登录 -->
         <a-doption @click="logOut">
@@ -178,11 +171,6 @@ const onUpdate = () => {
   router.push({
     path: "/personal/user-settings"
   });
-};
-
-// 项目地址
-const onProject = () => {
-  window.open("", "_blank");
 };
 
 // 退出登录
